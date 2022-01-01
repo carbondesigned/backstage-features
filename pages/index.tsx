@@ -23,7 +23,7 @@ const Home = ({ posts }: Props) => {
       <Hero />
       <Layout>
         {!posts && <p>Loading...</p>}
-        <div className="grid grid-cols-2 md:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full p-4 md:p-10 lg:p-18">
           {posts.map((post: any) => (
             <Post key={post.title} post={post} />
           ))}

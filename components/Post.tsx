@@ -13,7 +13,7 @@ interface Props {
 const Post = ({ post }: Props) => {
   console.log(post);
   return (
-    <div className="bg-white rounded w-1/2">
+    <div className="bg-white rounded w-full overflow-hidden">
       {/* image */}
       <div className="max-w-full">
         <CoverImage
@@ -23,10 +23,10 @@ const Post = ({ post }: Props) => {
         />
       </div>
       {/* rest */}
-      <div>
+      <div className="px-4 py-6 flex flex-col gap-4">
         {/* date & author */}
-        <div>
-          <div className="flex items-center">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
             <div className="h-12 w-12 rounded-full overflow-hidden">
               <Image
                 src={post.author.picture}

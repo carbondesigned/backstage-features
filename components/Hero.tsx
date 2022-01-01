@@ -10,12 +10,12 @@ const Hero: NextPage = (props: Props) => {
     <section className="p-5 lg:p-32 bg-gray-100 flex flex-col gap-6 bg-[url('/images/Gradient.png')] bg-contain bg-bottom bg-no-repeat relative">
       <div className="absolute inset-0 bg-[url('/images/Texture.png')] mix-blend-overlay pointer-events-none"></div>
       <div className="relative md:mb-10">
-        <h2 className="uppercase text-gray-400 md:text-xl lg:text-2xl">
-          Gracie Lowes&apos;
-        </h2>
-        <h1 className="text-[2em] md:text-[4em] lg:text-[6em] leading-none font-bold z-10">
+        <h1 className="text-[4em] lg:text-[6em] leading-none font-bold z-10">
           Backstage Features
         </h1>
+        <h2 className="uppercase text-gray-400 md:text-xl lg:text-2xl">
+          by Gracie Lowes
+        </h2>
       </div>
       <div className="flex flex-col gap-4 z-10">
         <p className="text-base md:text-lg lg:text-2xl w-3/4 text-gray-600">
