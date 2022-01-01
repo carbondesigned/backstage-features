@@ -3,6 +3,7 @@ import Head from "next/head";
 import { getPosts } from "@/lib/api";
 import { PostType } from "@/lib/types";
 import Layout from "@/components/Layout";
+import Hero from "@/components/Hero";
 
 interface Props {
   children: React.ReactNode;
@@ -19,12 +20,14 @@ const Home = ({ posts }: Props) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Hero />
       <Layout>
-        <h1>Test</h1>
         {!posts && <p>Loading...</p>}
-        {posts.map((post: any) => (
-          <Post key={post.title} post={post} />
-        ))}
+        <div className="grid grid-cols-2 md:grid-cols-3">
+          {posts.map((post: any) => (
+            <Post key={post.title} post={post} />
+          ))}
+        </div>
       </Layout>
     </div>
   );

@@ -26,13 +26,6 @@ const Post = ({ post }: Props) => {
       <div>
         {/* date & author */}
         <div>
-          <span>
-            {new Date(post.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
           <div className="flex items-center">
             <div className="h-12 w-12 rounded-full overflow-hidden">
               <Image
@@ -47,6 +40,13 @@ const Post = ({ post }: Props) => {
             </div>
             <span>{post.author.name}</span>
           </div>
+          <span>
+            {new Date(post.date).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </span>
         </div>
         {/* title & excerpt */}
         <div>
