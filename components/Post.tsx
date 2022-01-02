@@ -28,7 +28,6 @@ const Post = ({ post }: Props) => {
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <Avatar author={post.author} />
-            <span>{post.author.name}</span>
           </div>
           <span>
             {new Date(post.date).toLocaleDateString("en-US", {
