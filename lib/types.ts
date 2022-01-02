@@ -10,3 +10,9 @@ export interface PostType {
   slug: string;
   body?: [];
 }
+
+export interface VideoType {
+  contentDetails: any;
+  videoId: string;
+  publishedAt: string;
+}

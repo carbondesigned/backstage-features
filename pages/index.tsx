@@ -1,16 +1,22 @@
 import Post from "@/components/Post";
 import Head from "next/head";
 import { getPosts } from "@/lib/api";
-import { PostType } from "@/lib/types";
+import { PostType, VideoType } from "@/lib/types";
 import Layout from "@/components/Layout";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
+import axios from "axios";
+import ContentGrid from "@/components/ContentGrid";
+import Video from "@/components/Video";
 
 interface Props {
   children: React.ReactNode;
   posts: PostType[];
+  videos: VideoType[];
 }
-const Home = ({ posts }: Props) => {
+
+const Home = ({ posts, videos }: Props) => {
+  console.log(videos);
   return (
     <div>
       <Head>
@@ -25,11 +31,23 @@ const Home = ({ posts }: Props) => {
       <Hero />
       <Layout>
         {!posts && <p>Loading...</p>}
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full p-4 md:p-10 lg:p-18">
-          {posts.map((post: any) => (
+        <ContentGrid contentTitle="Posts" viewAll="/posts">
+          {posts.slice(0, 5).map((post: any) => (
             <Post key={post.title} post={post} />
           ))}
-        </div>
+        </ContentGrid>
+        {!videos && <p>Loading...</p>}
+        <ContentGrid videos contentTitle="Videos" viewAll="/videos">
+          {videos &&
+            videos
+              .slice(0, 5)
+              .map((video) => (
+                <Video
+                  videoId={video.contentDetails.videoId}
+                  key={video.contentDetails.videoId}
+                />
+              ))}
+        </ContentGrid>
       </Layout>
     </div>
   );
@@ -37,8 +55,11 @@ const Home = ({ posts }: Props) => {
 
 export async function getServerSideProps({ preview = false }) {
   const posts: PostType[] = await getPosts(preview);
+  const { data } = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=PLGm4HIhsHl1EMUN035h9P2WQG9MTHFZio&key=${process.env.NEXT_PUBLIC_API_KEY}`
+  );
   return {
-    props: { posts, preview },
+    props: { posts, preview, videos: data.items },
   };
 }
 

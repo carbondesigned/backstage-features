@@ -30,7 +30,7 @@ const PostHeader = ({ post }: Props) => {
           </span>
         </div>
       </div>
-      <div className="max-w-full">
+      <div className="max-w-full lg:w-1/2">
         <CoverImage title={post.title} imageObject={post.coverImage} />
       </div>
     </>

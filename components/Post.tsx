@@ -12,7 +12,6 @@ interface Props {
 }
 
 const Post = ({ post }: Props) => {
-  console.log(post);
   return (
     <div className="bg-white rounded w-full overflow-hidden">
       {/* image */}
