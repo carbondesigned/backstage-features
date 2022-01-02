@@ -5,6 +5,7 @@ import BlockContent from "@sanity/block-content-to-react";
 
 import { PostType } from "@/lib/types";
 import CoverImage from "./CoverImage";
+import Avatar from "./Avatar";
 
 interface Props {
   post: PostType;
@@ -27,17 +28,7 @@ const Post = ({ post }: Props) => {
         {/* date & author */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <div className="h-12 w-12 rounded-full overflow-hidden">
-              <Image
-                src={post.author.picture}
-                alt={post.author.name}
-                layout="responsive"
-                width={50}
-                height={50}
-                objectFit="cover"
-                objectPosition="center"
-              />
-            </div>
+            <Avatar author={post.author} />
             <span>{post.author.name}</span>
           </div>
           <span>

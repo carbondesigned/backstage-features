@@ -8,4 +8,5 @@ export interface PostType {
   date: string;
   excerpt: [];
   slug: string;
+  body?: [];
 }

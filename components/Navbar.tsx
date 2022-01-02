@@ -1,13 +1,14 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
+import React from "react";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Home", href: "/", current: false },
+  { name: "Posts", href: "#", current: false },
+  { name: "About", href: "/about", current: false },
+  { name: "Contact", href: "#", current: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -15,12 +16,22 @@ function classNames(...classes: string[]) {
 }
 
 export default function Example() {
+  const router = useRouter();
+  // if url === navigation.href, set navigation object current to true
+  navigation.forEach((nav) => {
+    if (router.pathname === nav.href) {
+      nav.current = true;
+    } else {
+      nav.current = false;
+    }
+  });
+
   return (
     <Disclosure as="nav" className="bg-white">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
+          <div className="w-full">
+            <div className="relative flex items-center justify-end h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -32,18 +43,21 @@ export default function Example() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-end">
                 <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
+                  <div className="flex px-12 md:px-20">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "underline text-gray-900 font-bold"
-                            : "text-gray-600 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
+                            ? "underline text-gray-900 font-bold decoration-wavy decoration-[#7000FF]"
+                            : "",
+                          item.name === "Contact"
+                            ? "bg-[#7000FF] text-white rounded hover:bg-[#5d00d6] ml-12"
+                            : "",
+                          "px-3 py-2 text-sm font-medium duration-200 hover:underline decoration-wavy decoration-[#7000FF]"
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
@@ -53,8 +67,7 @@ export default function Example() {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* Profile dropdown */}
+              {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Menu as="div" className="ml-3 relative">
                   <div>
                     <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -113,7 +126,7 @@ export default function Example() {
                     </Menu.Items>
                   </Transition>
                 </Menu>
-              </div>
+              </div> */}
             </div>
           </div>
 
