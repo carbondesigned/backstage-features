@@ -4,6 +4,7 @@ import { getPosts } from "@/lib/api";
 import { PostType } from "@/lib/types";
 import Layout from "@/components/Layout";
 import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
 
 interface Props {
   children: React.ReactNode;
@@ -20,6 +21,7 @@ const Home = ({ posts }: Props) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       <Hero />
       <Layout>
         {!posts && <p>Loading...</p>}
