@@ -8,7 +8,11 @@ interface Props {
 
 const Layout = (props: Props) => {
   return (
-    <main className={`bg-gray-100 ${props.full && "min-h-screen"}`}>
+    <main
+      className={`bg-gray-100 p-4 md:p-10 lg:p-52 ${
+        props.full && "min-h-screen"
+      }`}
+    >
       {props.children}
     </main>
   );

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Button from "./Button";
 
 interface Props {
   children: React.ReactNode;
@@ -10,14 +11,18 @@ interface Props {
 
 const ContentGrid = (props: Props) => {
   return (
-    <div className="w-full p-4 mb-20 md:p-10 lg:p-18">
+    <div className="w-full mb-20">
       <div className="flex items-center w-full justify-between">
         <h3 className="text-6xl py-6 font-bold">{props.contentTitle}</h3>
-        <span>
-          <Link href={props.viewAll ? props.viewAll : ""}>
-            <a className="text-lg text-gray-600">View All</a>
-          </Link>
-        </span>
+        {props.viewAll && (
+          <span>
+            <Link href={props.viewAll ? props.viewAll : ""}>
+              <a className="text-lg text-gray-600">
+                <Button secondary>View All</Button>
+              </a>
+            </Link>
+          </span>
+        )}
       </div>
       <div
         className={`grid gap-4 w-full grid-cols-1  ${

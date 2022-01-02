@@ -5,8 +5,9 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const navigation = [
-  { name: "Home", href: "/", current: false },
-  { name: "Posts", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "Posts", href: "/posts", current: false },
+  { name: "Videos", href: "/videos", current: false },
   { name: "About", href: "/about", current: false },
   { name: "Contact", href: "#", current: false },
 ];
@@ -27,7 +28,7 @@ export default function Example() {
   });
 
   return (
-    <Disclosure as="nav" className="bg-white">
+    <Disclosure as="nav" className="bg-white fixed w-full z-20">
       {({ open }) => (
         <>
           <div className="w-full">

@@ -32,7 +32,7 @@ const Home = ({ posts, videos }: Props) => {
       <Layout>
         {!posts && <p>Loading...</p>}
         <ContentGrid contentTitle="Posts" viewAll="/posts">
-          {posts.slice(0, 5).map((post: any) => (
+          {posts.slice(0, 6).map((post: any) => (
             <Post key={post.title} post={post} />
           ))}
         </ContentGrid>
@@ -40,7 +40,7 @@ const Home = ({ posts, videos }: Props) => {
         <ContentGrid videos contentTitle="Videos" viewAll="/videos">
           {videos &&
             videos
-              .slice(0, 5)
+              .slice(0, 4)
               .map((video) => (
                 <Video
                   videoId={video.contentDetails.videoId}

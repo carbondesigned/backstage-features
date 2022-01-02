@@ -6,6 +6,8 @@ import BlockContent from "@sanity/block-content-to-react";
 import { PostType } from "@/lib/types";
 import CoverImage from "./CoverImage";
 import Avatar from "./Avatar";
+import Button from "./Button";
+import Link from "next/link";
 
 interface Props {
   post: PostType;
@@ -41,6 +43,13 @@ const Post = ({ post }: Props) => {
         <div>
           <h1 className="text-2xl font-medium">{post.title}</h1>
           <BlockContent blocks={post.excerpt} />
+        </div>
+        <div>
+          <Button primary>
+            <Link href={`/posts/${post.slug}`}>
+              <a>Read More</a>
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

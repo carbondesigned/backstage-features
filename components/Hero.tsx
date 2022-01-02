@@ -22,7 +22,7 @@ const Hero: NextPage = (props: Props) => {
           Interviews, coverages, people, get backstage info about your favorite
           celeb from Backstage Features & Gracie Lowes
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 z-10">
           <Button primary>Posts</Button>
           <Button secondary>Contact</Button>
         </div>
