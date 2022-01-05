@@ -5,7 +5,9 @@ interface Props {
 }
 
 const PostLayout = (props: Props) => {
-  return <main className="px-10 lg:px-52">{props.children}</main>;
+  return (
+    <main className="w-full px-5 lg:px-52 2xl:px-[28em]">{props.children}</main>
+  );
 };
 
 export default PostLayout;

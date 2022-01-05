@@ -28,7 +28,7 @@ const Post = ({ post, morePosts }: Props) => {
         <p>Loading…</p>
       ) : (
         <PostLayout>
-          <article>
+          <article className="w-full">
             <Head>
               <title>{post.title}</title>
               {/* <meta property="og:image" content={post.ogImage.url} /> */}

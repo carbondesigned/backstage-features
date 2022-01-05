@@ -12,7 +12,7 @@ interface Props {
 const PostHeader = ({ post }: Props) => {
   return (
     <>
-      <div className="flex flex-col gap-2 py-16 xl:px-56 2xl:px-80">
+      <div className="flex flex-col gap-2 py-16">
         <h1 className="text-5xl">{post.title}</h1>
         <p className="text-2xl text-gray-500">
           <BlockContent blocks={post.excerpt} />
@@ -30,10 +30,8 @@ const PostHeader = ({ post }: Props) => {
           </span>
         </div>
       </div>
-      <div className="w-full xl:grid xl:place-items-center">
-        <div className="max-w-full xl:w-1/2">
-          <CoverImage title={post.title} imageObject={post.coverImage} />
-        </div>
+      <div className="w-full m-auto">
+        <CoverImage title={post.title} imageObject={post.coverImage} />
       </div>
     </>
   );

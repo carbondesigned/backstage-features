@@ -15,5 +15,13 @@ const serializers = {
 };
 
 export default function Youtube({ blocks }: any) {
-  return <PortableText blocks={blocks} serializers={serializers} />;
+  return (
+    <div className="max-w-full w-12 h-96 md:h-[28em]">
+      <PortableText
+        className="w-12"
+        blocks={blocks}
+        serializers={serializers}
+      />
+    </div>
+  );
 }

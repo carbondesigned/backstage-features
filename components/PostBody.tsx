@@ -9,14 +9,14 @@ const serializers = {
     youtube: ({ node }: any) => {
       const { url } = node;
       const id = getYouTubeId(url);
-      return <YouTube videoId={id ? id : ""} />;
+      return <YouTube className="w-full" videoId={id ? id : ""} />;
     },
   },
 };
 
 export default function PostBody({ content }: any) {
   return (
-    <div className="w-full xl:px-56 2xl:px-80">
+    <div className="w-full">
       <BlockContent
         blocks={content}
         projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
