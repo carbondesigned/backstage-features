@@ -9,6 +9,7 @@ import PostBody from "@/components/PostBody";
 import Head from "next/head";
 import PostHeader from "@/components/PostHeader";
 import Navbar from "@/components/Navbar";
+import Youtube from "@/components/YouTube";
 
 interface Props {
   post: PostType;
