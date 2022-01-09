@@ -12,12 +12,14 @@ const contact = (props: Props) => {
         <Navbar />
       </div>
       <section className="flex w-full">
-        <div className="bg-[#7000ff] w-1/4 h-screen z-20">
-          <h1 className="text-6xl text-white p-6 mt-12">Backstage Features</h1>
+        <div className="bg-[#7000ff] w-1/4 h-screen z-20 hidden lg:block">
+          <h1 className="text-4xl xl:text-6xl font-bold text-white p-6 mt-12">
+            Backstage Features
+          </h1>
         </div>
         <div className="w-full h-screen grid place-items-center">
           <form
-            className="w-1/2 flex flex-col gap-4"
+            className="w-full px-4 md:w-1/2 md:px-0 flex flex-col gap-4"
             action="https://formspree.io/f/xwkypjdg"
             method="POST"
           >
