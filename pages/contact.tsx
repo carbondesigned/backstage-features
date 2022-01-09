@@ -1,4 +1,6 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Socials from "@/components/Socials";
 import React from "react";
 
 interface Props {}
@@ -20,6 +22,9 @@ const contact = (props: Props) => {
             method="POST"
           >
             <div className="flex flex-col gap-2">
+              <div className="w-full">
+                <Socials />
+              </div>
               <h2 className="text-4xl font-bold">Contact Backstage Features</h2>
               <p className="text-gray-700 text-lg">
                 Let me know anything! Inquiries? leave them here! Questions?
@@ -55,6 +60,7 @@ const contact = (props: Props) => {
           </form>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

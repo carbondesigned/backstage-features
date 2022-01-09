@@ -40,9 +40,11 @@ const Post = ({ post }: Props) => {
           </span>
         </div>
         {/* title & excerpt */}
-        <div>
+        <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-medium">{post.title}</h1>
-          <BlockContent blocks={post.excerpt} />
+          <div className="text-gray-600 text-base">
+            <BlockContent blocks={post.excerpt} />
+          </div>
         </div>
         <div>
           <Button primary>
