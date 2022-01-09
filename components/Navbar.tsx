@@ -9,7 +9,7 @@ const navigation = [
   { name: "Posts", href: "/posts", current: false },
   { name: "Videos", href: "/videos", current: false },
   { name: "About", href: "/about", current: false },
-  { name: "Contact", href: "#", current: false },
+  { name: "Contact", href: "/contact", current: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -52,7 +52,7 @@ export default function Example() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
+                          item.current && item.name !== "Contact"
                             ? "underline text-gray-900 font-bold decoration-wavy decoration-[#7000FF]"
                             : "",
                           item.name === "Contact"
