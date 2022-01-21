@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import { getPosts } from "@/lib/api";
 import { PostType } from "@/lib/types";
 import React from "react";
+import Head from "next/head";
 
 interface Props {
   posts: PostType[];
@@ -13,6 +14,11 @@ interface Props {
 const index = ({ posts }: Props) => {
   return (
     <>
+      <Head>
+        <title>Backstage Features | Posts</title>
+        {/* favicon */}
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Navbar />
       <Layout>
         <ContentGrid contentTitle="Posts">

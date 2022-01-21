@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Socials from "@/components/Socials";
+import Head from "next/head";
 import React from "react";
 
 interface Props {}
@@ -8,11 +9,16 @@ interface Props {}
 const contact = (props: Props) => {
   return (
     <>
+      <Head>
+        <title>Backstage Features | Contact</title>
+        {/* favicon */}
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      </Head>
       <div className="fixed top-0 left-0 w-full">
         <Navbar />
       </div>
       <section className="flex w-full">
-        <div className="bg-[#7000ff] w-1/4 h-screen z-20 hidden lg:block">
+        <div className="bg-[url('/images/illustration.svg')] bg-cover w-1/4 lg:w-2/5 h-screen z-20 hidden lg:block">
           <h1 className="text-4xl xl:text-6xl font-bold text-white p-6 mt-12">
             Backstage Features
           </h1>
@@ -53,6 +59,7 @@ const contact = (props: Props) => {
               <label htmlFor="message">Your Message</label>
               <textarea
                 name="message"
+                rows={5}
                 className="bg-gray-100 w-full p-4 rounded"
               />
             </fieldset>

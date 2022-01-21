@@ -9,7 +9,6 @@ import PostBody from "@/components/PostBody";
 import Head from "next/head";
 import PostHeader from "@/components/PostHeader";
 import Navbar from "@/components/Navbar";
-import Youtube from "@/components/YouTube";
 
 interface Props {
   post: PostType;
@@ -23,16 +22,15 @@ const Post = ({ post, morePosts }: Props) => {
   }
   return (
     <>
+      <Head>
+        <title>{post.title}</title>
+      </Head>
       <Navbar />
       {router.isFallback ? (
         <p>Loading…</p>
       ) : (
         <PostLayout>
           <article className="w-full">
-            <Head>
-              <title>{post.title}</title>
-              {/* <meta property="og:image" content={post.ogImage.url} /> */}
-            </Head>
             <PostHeader post={post} />
             <PostBody content={post.body} />
           </article>
@@ -64,7 +62,7 @@ export async function getStaticPaths() {
     })) || [];
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 

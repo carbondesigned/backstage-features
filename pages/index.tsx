@@ -16,7 +16,6 @@ interface Props {
 }
 
 const Home = ({ posts, videos }: Props) => {
-  console.log(videos);
   return (
     <div>
       <Head>

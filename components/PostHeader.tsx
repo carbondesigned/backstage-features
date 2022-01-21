@@ -12,14 +12,14 @@ interface Props {
 const PostHeader = ({ post }: Props) => {
   return (
     <>
-      <div className="flex flex-col gap-2 py-16">
+      <div className="flex flex-col gap-4 py-16">
         <h1 className="text-5xl">{post.title}</h1>
         <p className="text-2xl text-gray-500">
           <BlockContent blocks={post.excerpt} />
         </p>
         <div className="flex gap-2 items-center">
           <div className="block">
-            <Avatar author={post.author} />
+            <Avatar author={post.author} date={post.date} />
           </div>
           <span className="text-gray-500">
             {new Date(post.date).toLocaleDateString("en-US", {

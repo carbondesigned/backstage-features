@@ -16,11 +16,9 @@ const ContentGrid = (props: Props) => {
         <h3 className="text-6xl py-6 font-bold">{props.contentTitle}</h3>
         {props.viewAll && (
           <span>
-            <Link href={props.viewAll ? props.viewAll : ""}>
-              <a className="text-lg text-gray-600">
-                <Button secondary>View All</Button>
-              </a>
-            </Link>
+            <Button secondary href={props.viewAll}>
+              View All
+            </Button>
           </span>
         )}
       </div>

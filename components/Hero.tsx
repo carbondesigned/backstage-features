@@ -23,8 +23,12 @@ const Hero: NextPage = (props: Props) => {
           celeb from Backstage Features & Gracie Lowes
         </p>
         <div className="flex gap-2 z-10">
-          <Button primary>Posts</Button>
-          <Button secondary>Contact</Button>
+          <Button primary href="/posts">
+            Posts
+          </Button>
+          <Button secondary href="/contact">
+            Contact
+          </Button>
         </div>
       </div>
       {/* <div className="z-10 mb-44 w-full md:w-3/4 py-10 flex justify-center">

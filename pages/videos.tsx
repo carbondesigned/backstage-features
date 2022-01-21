@@ -5,6 +5,7 @@ import ContentGrid from "@/components/ContentGrid";
 import { VideoType } from "@/lib/types";
 import axios from "axios";
 import Video from "@/components/Video";
+import Head from "next/head";
 
 interface Props {
   videos: VideoType[];
@@ -13,6 +14,11 @@ interface Props {
 const videos = ({ videos }: Props) => {
   return (
     <>
+      <Head>
+        <title>Backstage Features | Videos</title>
+        {/* favicon */}
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Navbar />
       <Layout>
         <ContentGrid contentTitle="Videos" videos>

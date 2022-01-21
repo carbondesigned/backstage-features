@@ -9,7 +9,7 @@ const serializers = {
     youtube: ({ node }: any) => {
       const { url } = node;
       const id = getYouTubeId(url);
-      return <YouTube className="w-full" videoId={id ? id : ""} />;
+      return <YouTube className="w-full aspect-video" videoId={id ? id : ""} />;
     },
   },
 };

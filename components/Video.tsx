@@ -7,7 +7,7 @@ interface Props {
 const Video = (props: Props) => {
   return (
     <iframe
-      className="w-full h-96 md:h-[28em]"
+      className="aspect-video w-full rounded"
       src={`https://www.youtube.com/embed/${props.videoId}`}
       title="YouTube video player"
       frameBorder="0"

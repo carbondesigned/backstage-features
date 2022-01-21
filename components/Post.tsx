@@ -29,15 +29,8 @@ const Post = ({ post }: Props) => {
         {/* date & author */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <Avatar author={post.author} />
+            <Avatar author={post.author} date={post.date} />
           </div>
-          <span>
-            {new Date(post.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
         </div>
         {/* title & excerpt */}
         <div className="flex flex-col gap-4">
