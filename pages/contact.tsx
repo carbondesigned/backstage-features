@@ -11,8 +11,6 @@ const contact = (props: Props) => {
     <>
       <Head>
         <title>Backstage Features | Contact</title>
-        {/* favicon */}
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <div className="fixed top-0 left-0 w-full">
         <Navbar />

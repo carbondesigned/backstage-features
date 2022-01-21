@@ -12,7 +12,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         {/* favicon */}
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link
+          rel="icon"
+          href="https://raw.githubusercontent.com/carbondesigned/backstage-features/main/public/favicon.ico"
+          type="image/x-icon"
+        />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>

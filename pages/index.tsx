@@ -24,7 +24,6 @@ const Home = ({ posts, videos }: Props) => {
           name="description"
           content="Interviews, articles about your favorite celebrities with Gracie Lowes & Backstage Features"
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <Hero />

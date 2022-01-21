@@ -16,8 +16,6 @@ const index = ({ posts }: Props) => {
     <>
       <Head>
         <title>Backstage Features | Posts</title>
-        {/* favicon */}
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <Layout>

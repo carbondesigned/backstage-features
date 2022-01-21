@@ -16,8 +16,6 @@ const videos = ({ videos }: Props) => {
     <>
       <Head>
         <title>Backstage Features | Videos</title>
-        {/* favicon */}
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <Layout>
