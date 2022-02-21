@@ -9,6 +9,7 @@ import PostBody from "@/components/PostBody";
 import Head from "next/head";
 import PostHeader from "@/components/PostHeader";
 import Navbar from "@/components/Navbar";
+import { GetServerSideProps } from "next";
 
 interface Props {
   post: PostType;
@@ -40,17 +41,11 @@ const Post = ({ post, morePosts }: Props) => {
   );
 };
 
-export async function getStaticProps({ params, preview = false }: any) {
-  const data = await getPostAndMorePosts(params.slug, preview);
-  return {
-    props: {
-      preview,
-      post: data?.post || null,
-      morePosts: data?.morePosts || null,
-    },
-    revalidate: 1,
-  };
-}
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const { slug } = ctx.query;
+//   const data = await getPostAndMorePosts(slug as string, false);
+//   return { props: data };
+// };
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug();
@@ -63,6 +58,17 @@ export async function getStaticPaths() {
   return {
     paths,
     fallback: false,
+  };
+}
+export async function getStaticProps({ params, preview = false }: any) {
+  const data = await getPostAndMorePosts(params.slug, preview);
+  return {
+    props: {
+      preview,
+      post: data?.post,
+      morePosts: data?.morePosts,
+    },
+    revalidate: 1,
   };
 }
 
