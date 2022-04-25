@@ -1,15 +1,15 @@
-import { PostType } from "@/lib/types";
-import { useRouter } from "next/router";
-import ErrorPage from "next/error";
+import { PostType } from '@/lib/types';
+import { useRouter } from 'next/router';
+import ErrorPage from 'next/error';
 
-import React from "react";
-import { getAllPostsWithSlug, getPostAndMorePosts } from "@/lib/api";
-import PostLayout from "@/components/PostLayout";
-import PostBody from "@/components/PostBody";
-import Head from "next/head";
-import PostHeader from "@/components/PostHeader";
-import Navbar from "@/components/Navbar";
-import { GetServerSideProps } from "next";
+import React from 'react';
+import { getAllPostsWithSlug, getPostAndMorePosts } from '@/lib/api';
+import PostLayout from '@/components/PostLayout';
+import PostBody from '@/components/PostBody';
+import Head from 'next/head';
+import PostHeader from '@/components/PostHeader';
+import Navbar from '@/components/Navbar';
+import { GetServerSideProps } from 'next';
 
 interface Props {
   post: PostType;
@@ -21,17 +21,20 @@ const Post = ({ post, morePosts }: Props) => {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
+  // @ts-ignore
+  const excerpt = post.excerpt[0].children[0].text;
   return (
     <>
       <Head>
         <title>{post.title}</title>
+        <meta name='description' content={excerpt} />
       </Head>
       <Navbar />
       {router.isFallback ? (
         <p>Loading…</p>
       ) : (
         <PostLayout>
-          <article className="w-full">
+          <article className='w-full'>
             <PostHeader post={post} />
             <PostBody content={post.body} />
           </article>
@@ -41,13 +44,13 @@ const Post = ({ post, morePosts }: Props) => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const { slug } = ctx.query;
-//   const data = await getPostAndMorePosts(slug as string, false);
-//   return { props: data };
-// };
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { slug } = ctx.query;
+  const data = await getPostAndMorePosts(slug as string, false);
+  return { props: data };
+};
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug();
   const paths =
     allPosts?.map((post: PostType) => ({
@@ -70,6 +73,6 @@ export async function getStaticProps({ params, preview = false }: any) {
     },
     revalidate: 1,
   };
-}
+} */
 
 export default Post;
