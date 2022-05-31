@@ -11,6 +11,7 @@ specifiers:
   daisyui: ^2.15.2
   eslint: 8.16.0
   eslint-config-next: 12.1.6
+  jwt-decode: ^3.1.2
   marked: ^4.0.16
   next: 12.1.6
   postcss: ^8.4.14
@@ -27,6 +28,7 @@ dependencies:
   axios: 0.27.2
   browserslist: 4.20.3
   daisyui: 2.15.2_ugi4xkrfysqkt4c4y6hkyfj344
+  jwt-decode: 3.1.2
   marked: 4.0.16
   next: 12.1.6_ef5jwxihqo6n7gxfmzogljlgcm
   react: 18.1.0
@@ -1477,6 +1479,10 @@ packages:
       array-includes: 3.1.5
       object.assign: 4.1.2
     dev: true
+
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+    dev: false
 
   /language-subtag-registry/0.3.21:
     resolution: {integrity: sha512-L0IqwlIXjilBVVYKFT37X9Ih11Um5NEl9cbJIuU/SwP/zEEAbBPOnEeeuxVMf45ydWQRDQN3Nqc96OgbH1K+Pg==}
