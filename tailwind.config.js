@@ -1,10 +1,27 @@
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: [],
+  daisyui: {
+    themes: [
+      {
+        theme: {
+          primary: '#7000FF',
+          secondary: '#00C6BA',
+          accent: '#e5a387',
+          neutral: '#070707',
+          'neutral-content': '#AEADAD',
+          'base-100': '#FFFDFD',
+          'base-200': '#242324',
+          'base-300': '#1D1D1D',
+          info: '#97C9F7',
+          success: '#23CE6B',
+          warning: '#F7A350',
+          error: '#FF2C55',
+        },
+      },
+    ],
+  },
+  plugins: [require('daisyui')],
 };

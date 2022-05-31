@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -6,8 +6,15 @@ type Props = {
 
 const AppContext = createContext({} as any);
 
-export function AppProvider({ children }: Props) {
-  const state = {};
+export function useAppContext() {
+  return useContext(AppContext);
+}
 
+export function AppProvider({ children }: Props) {
+  const [token, setToken] = useState('');
+  const state = {
+    token,
+    setToken,
+  };
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
 }
