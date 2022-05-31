@@ -11,7 +11,7 @@ export function useAppContext() {
 }
 
 export function AppProvider({ children }: Props) {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState<string>('');
   const state = {
     token,
     setToken,

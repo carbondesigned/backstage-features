@@ -3,7 +3,7 @@ import { useAppContext } from '../contexts/AppContext';
 
 type Props = {};
 
-const useGetToken = (props: Props) => {
+const useGetToken = () => {
   // create a custom react hook to get the token from local storage
   const { token, setToken } = useAppContext();
 
