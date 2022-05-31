@@ -1,4 +1,5 @@
 import useGetToken from 'hooks/useGetToken';
+import { usePosts } from 'hooks/usePosts';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -16,6 +17,8 @@ const Dashboard = (props: Props) => {
   const router = useRouter();
   const token = useGetToken();
 
+  const { data: posts, error, isLoading } = usePosts();
+
   useEffect(() => {
     let decodedToken: Token;
     decodedToken = jwtDecode(localStorage.getItem('token') ?? '');
@@ -27,7 +30,15 @@ const Dashboard = (props: Props) => {
       router.push('/');
     }
   }, []);
-  return <div className='min-h-screen bg-neutral'></div>;
+  return (
+    <div className='min-h-screen bg-neutral'>
+      <div>
+        {isLoading && <p>Loading...</p>}
+        {error && <p>Error: {error.message}</p>}
+        {posts && posts.map((post) => <div key={post.ID}>{post.title}</div>)}
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
