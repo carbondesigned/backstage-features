@@ -20,7 +20,6 @@ const CreatePostPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     control,
     formState: { errors },

@@ -7,6 +7,7 @@ import React from "react";
 import { useEffect } from "react";
 import Link from "next/link";
 import DashboardLayout from "components/Layouts/DashbardNav";
+import { IPost } from "types/posts";
 
 interface Token {
   email: string;
@@ -43,7 +44,8 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {isLoading && <p>Loading...</p>}
           {error && <p>Error: {error.message}</p>}
-          {posts && posts.map((post) => <Post post={post} key={post.ID} />)}
+          {posts &&
+            posts.map((post: IPost) => <Post post={post} key={post.ID} />)}
         </div>
       </DashboardLayout>
       <div></div>
