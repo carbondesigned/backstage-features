@@ -3,16 +3,15 @@ import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { IPost } from "types/posts";
 import api from "axiosStore";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import EditPostModal from "components/editPostModal";
+import EditPostModal from "components/EditPostModal";
+import { useAppContext } from "contexts/AppContext";
 
 type Props = {
   post: IPost;
 };
 
 const Post = ({ post }: Props) => {
+  const { setCurrentPost } = useAppContext();
   const queryClient = useQueryClient();
   const deletePost = useMutation(
     (slug: string) => {
@@ -30,11 +29,7 @@ const Post = ({ post }: Props) => {
   );
   return (
     <>
-      <EditPostModal post={post} />
-      <div
-        onClick={() => console.log(post.slug)}
-        className="bg-base-300 card text-base-100 rounded-xl"
-      >
+      <div className="bg-base-300 card text-base-100 rounded-xl">
         {post.cover && (
           <figure className="w-full h-52 relative">
             <Image
@@ -52,6 +47,7 @@ const Post = ({ post }: Props) => {
             <div className="dropdown dropdown-top dropdown-end">
               <label tabIndex={0} className="cursor-pointer">
                 <svg
+                  onClick={() => setCurrentPost(post)}
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 stroke-neutral-content"
                   fill="none"

@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import Link from "next/link";
 import DashboardLayout from "components/Layouts/DashbardNav";
 import { IPost } from "types/posts";
+import { useAppContext } from "contexts/AppContext";
+import EditPostModal from "components/EditPostModal";
 
 interface Token {
   email: string;
@@ -18,7 +20,7 @@ interface Token {
 const Dashboard = () => {
   const router = useRouter();
   const token = useGetToken();
-
+  const { currentPost } = useAppContext();
   const { data: posts, error, isLoading } = usePosts();
 
   useEffect(() => {
@@ -31,9 +33,12 @@ const Dashboard = () => {
     if (token?.email?.length < 0) {
       router.push("/");
     }
-  }, []);
+
+  console.log("current post: ", currentPost)
+  }, [currentPost]);
   return (
     <div className="min-h-screen bg-neutral flex gap-12">
+      {currentPost && <EditPostModal />}
       <DashboardLayout>
         <div className="text-base-100 py-6 flex w-full justify-between items-center">
           <h1 className="text-4xl">Dashboard</h1>

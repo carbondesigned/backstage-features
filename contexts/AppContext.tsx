@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { IPost } from 'types/posts';
 
 type Props = {
   children: ReactNode;
@@ -12,9 +13,12 @@ export function useAppContext() {
 
 export function AppProvider({ children }: Props) {
   const [token, setToken] = useState<string>('');
+  const [currentPost, setCurrentPost] = useState<IPost>()
   const state = {
     token,
     setToken,
+    currentPost,
+    setCurrentPost
   };
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
 }
