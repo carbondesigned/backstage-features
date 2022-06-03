@@ -1,5 +1,4 @@
 import DashboardLayout from "components/Layouts/DashbardNav";
-import FieldInput from "components/FormInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
@@ -8,14 +7,18 @@ import api from "axiosStore";
 import { useRouter } from "next/router";
 import Input from "components/FormInput";
 import { useState } from "react";
+import { useAuthors } from "hooks/useGetAuthors";
+import { IAuthor } from "types/author";
 const CreatePostPage = () => {
-  const [tags, setTags] = useState([""]);
+  const { data: authors, isLoading, error } = useAuthors();
+  console.log(authors);
   const router = useRouter();
   const createPostValidation = z.object({
     title: z.string().nullable(),
     excerpt: z.string().nullable(),
     body: z.string().nullable(),
     tags: z.string().nullable(),
+    author: z.string(),
   });
   const {
     register,
@@ -29,6 +32,7 @@ const CreatePostPage = () => {
       cover: "",
       title: "",
       excerpt: "",
+      author: "",
       tags: "",
       body: "",
     },
@@ -42,7 +46,8 @@ const CreatePostPage = () => {
       formData.append("title", data.title);
       formData.append("excerpt", data.excerpt);
       formData.append("body", data.body);
-      formData.append("tags", data.tags.split(','));
+      formData.append("tags", data.tags.split(","));
+      formData.append("author", data.author);
       formData.append("cover", inputFile.files?.item(0) as File);
       return api.post(`/posts/create`, formData, {
         headers: {
@@ -61,7 +66,6 @@ const CreatePostPage = () => {
   errors?.tags && console.log(errors.tags);
   const onSubmit = handleSubmit((data: any) => {
     createPost.mutate(data);
-    
   });
   return (
     <div className="bg-neutral w-full min-h-screen text-base-100">
@@ -112,19 +116,43 @@ const CreatePostPage = () => {
                 />
               )}
             />
-            <Controller
-              name="tags"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  label="Tags"
-                  name="tags"
-                  placeholder="Tags"
-                  type="text"
-                />
-              )}
-            />
+            <div className="flex w-full gap-6">
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-xl text-neutral-content"
+                  htmlFor="author"
+                >
+                  Author
+                </label>
+                <select
+                  {...register("author")}
+                  className="select bg-base-200 w-full max-w-xs"
+                  name="author"
+                >
+                  <option disabled selected>
+                    Pick Author
+                  </option>
+                  {authors?.map((author: IAuthor) => (
+                    <option key={author.ID} value={author.name}>
+                      {author.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <Controller
+                name="tags"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    label="Tags"
+                    name="tags"
+                    placeholder="Tags"
+                    type="text"
+                  />
+                )}
+              />
+            </div>
             {/* TODO: work with Marked to handle markdown  */}
             <div className="flex flex-col gap-2">
               {errors.body && <div>{errors.body.message}</div>}

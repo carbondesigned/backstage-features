@@ -18,7 +18,7 @@ const Input = ({
   ...props
 }: Props) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 flex-1">
       {error && <div>{error}</div>}
       <label htmlFor={name} className="text-xl text-neutral-content">
         {label}

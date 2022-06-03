@@ -42,6 +42,21 @@ const Post = ({ post }: Props) => {
           </figure>
         )}
         <div className="card-body">
+          <div className="flex flex-col gap-2">
+            {post.tags[0].length > 0 && (
+              <div className="flex items-center gap-2">
+                {post.tags[0]?.split(",").map((tag: string) => (
+                  <span
+                    className="px-6 py-2 bg-primary rounded-full text-xs"
+                    key={tag}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+            <p>{post.author}</p>
+          </div>
           <div className="flex justify-between">
             <h4 className="text-2xl font-bold w-3/4">{post.title}</h4>
             <div className="dropdown dropdown-top dropdown-end">
@@ -80,7 +95,7 @@ const Post = ({ post }: Props) => {
               </ul>
             </div>
           </div>
-          <p>{post?.excerpt}</p>
+          <p className="text-neutral-content">{post?.excerpt}</p>
         </div>
       </div>
     </>

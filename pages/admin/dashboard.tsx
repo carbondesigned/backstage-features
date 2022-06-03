@@ -43,7 +43,7 @@ const Dashboard = () => {
         <div className="text-base-100 py-6 flex w-full justify-between items-center">
           <h1 className="text-4xl">Dashboard</h1>
           <Link href="/admin/create">
-            <a className="btn btn-lg bg-base-300">Create</a>
+            <a className="btn text-base-100 btn-lg bg-primary">Create</a>
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
