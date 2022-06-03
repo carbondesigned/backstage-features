@@ -33,8 +33,6 @@ const Dashboard = () => {
     if (token?.email?.length < 0) {
       router.push("/");
     }
-
-    console.log("current post: ", currentPost);
   }, [currentPost]);
   return (
     <div className="min-h-screen bg-neutral flex gap-12">
@@ -46,12 +44,19 @@ const Dashboard = () => {
             <a className="btn text-base-100 btn-lg bg-primary">Create</a>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {isLoading && <p>Loading...</p>}
-          {error && <p>Error: {error.message}</p>}
-          {posts &&
-            posts.map((post: IPost) => <Post post={post} key={post.ID} />)}
-        </div>
+        {isLoading && (
+          <div className="grid w-full place-items-center min-h-[30vh]">
+            <div className="loader ease-linear rounded-full border-4 border-t-4 border-primary-dark-400 h-12 w-12 mb-4"></div>
+          </div>
+        )}
+        {error && <p>Error: {error.message}</p>}
+        {!isLoading && posts && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post: IPost) => (
+              <Post post={post} key={post.ID} />
+            ))}
+          </div>
+        )}
       </DashboardLayout>
       <div></div>
     </div>
