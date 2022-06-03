@@ -12,7 +12,7 @@ type Props = {
 
 const Post = ({ post }: Props) => {
   const { setCurrentPost } = useAppContext();
-  const {data: author, isLoading, error} = useAuthor(post.author)
+  const { data: author, isLoading, error } = useAuthor(post.author);
   const queryClient = useQueryClient();
   const deletePost = useMutation(
     (slug: string) => {
@@ -58,9 +58,17 @@ const Post = ({ post }: Props) => {
             )}
             {isLoading && <p>Author is loading</p>}
             {error && <p>Author errror</p>}
-            {author && <p>{author.name}</p>}
+            {author && (
+              <div className="flex gap-4 items-center">
+                <div className="w-8 h-8 bg-base-200 rounded-full"></div>
+                <p className="font-bold">
+                <span className="font-normal">{" "} By {" "}</span>
+                  {author.name}
+                </p>
+              </div>
+            )}
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between mt-6">
             <h4 className="text-2xl font-bold w-3/4">{post.title}</h4>
             <div className="dropdown dropdown-top dropdown-end">
               <label tabIndex={0} className="cursor-pointer">
