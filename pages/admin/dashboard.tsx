@@ -9,7 +9,7 @@ import Link from "next/link";
 import DashboardLayout from "components/Layouts/DashbardNav";
 import { IPost } from "types/posts";
 import { useAppContext } from "contexts/AppContext";
-import EditPostModal from "components/EditPostModal";
+import { EditPostModal } from "components/Dashboard/EditPostModal";
 
 interface Token {
   email: string;
@@ -34,7 +34,7 @@ const Dashboard = () => {
       router.push("/");
     }
 
-  console.log("current post: ", currentPost)
+    console.log("current post: ", currentPost);
   }, [currentPost]);
   return (
     <div className="min-h-screen bg-neutral flex gap-12">

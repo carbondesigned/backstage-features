@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useAppContext } from "contexts/AppContext";
 
-const EditPostModal = () => {
+export const EditPostModal = () => {
     const { currentPost } = useAppContext();
     const queryClient = useQueryClient();
     
@@ -208,5 +208,3 @@ const EditPostModal = () => {
         </>
     );
 };
-
-export default EditPostModal;
