@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useMutation, useQueryClient } from "react-query";
-import { IPost } from "types/posts";
 import api from "axiosStore";
 import { z } from "zod";
 import { useForm } from "react-hook-form";

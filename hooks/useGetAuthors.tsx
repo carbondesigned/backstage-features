@@ -1,4 +1,3 @@
-
 import { useQuery } from 'react-query';
 import api from 'axiosStore';
 import { IAuthor } from 'types/author';

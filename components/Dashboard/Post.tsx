@@ -3,8 +3,8 @@ import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { IPost } from "types/posts";
 import api from "axiosStore";
-import EditPostModal from "components/EditPostModal";
 import { useAppContext } from "contexts/AppContext";
+import { useAuthor } from "hooks/useGetAuthor";
 
 type Props = {
   post: IPost;
@@ -12,6 +12,7 @@ type Props = {
 
 const Post = ({ post }: Props) => {
   const { setCurrentPost } = useAppContext();
+  const {data: author, isLoading, error} = useAuthor(post.author)
   const queryClient = useQueryClient();
   const deletePost = useMutation(
     (slug: string) => {
@@ -55,7 +56,9 @@ const Post = ({ post }: Props) => {
                 ))}
               </div>
             )}
-            <p>{post.author}</p>
+            {isLoading && <p>Author is loading</p>}
+            {error && <p>Author errror</p>}
+            {author && <p>{author.name}</p>}
           </div>
           <div className="flex justify-between">
             <h4 className="text-2xl font-bold w-3/4">{post.title}</h4>
