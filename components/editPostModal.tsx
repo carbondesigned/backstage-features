@@ -11,7 +11,7 @@ import { useAppContext } from "contexts/AppContext";
 const EditPostModal = () => {
     const { currentPost } = useAppContext();
     const queryClient = useQueryClient();
-
+    
     const editPostValidation = z.object({
         title: z.string().nullable(),
         excerpt: z.string().nullable(),
@@ -34,6 +34,18 @@ const EditPostModal = () => {
             cover: null,
         },
     });
+
+    // resets values when trying to edit multiple posts (when currentPost changes)
+    React.useEffect(() => {
+        let defaultValues =  {
+            title: currentPost.title,
+            excerpt: currentPost.excerpt,
+            body: currentPost.body,
+            tags: currentPost.tags[0],
+            cover: null,
+        }
+        reset(defaultValues)
+    }, [reset, currentPost])
 
     const editPost = useMutation(
         (data: any) => {
