@@ -6,15 +6,19 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useAppContext } from "contexts/AppContext";
+import { IAuthor } from "types/author";
+import { useAuthors } from "hooks/useGetAuthors";
 
 export const EditPostModal = () => {
+    const { data: authors, isLoading, error } = useAuthors();
     const { currentPost } = useAppContext();
     const queryClient = useQueryClient();
-    
+
     const editPostValidation = z.object({
         title: z.string().nullable(),
         excerpt: z.string().nullable(),
         body: z.string().nullable(),
+        author: z.string().nullable(),
         tags: z.string().nullable(),
     });
 
@@ -29,6 +33,7 @@ export const EditPostModal = () => {
             title: currentPost.title,
             excerpt: currentPost.excerpt,
             body: currentPost.body,
+            author: currentPost.author,
             tags: currentPost.tags[0],
             cover: null,
         },
@@ -36,15 +41,15 @@ export const EditPostModal = () => {
 
     // resets values when trying to edit multiple posts (when currentPost changes)
     React.useEffect(() => {
-        let defaultValues =  {
+        let defaultValues = {
             title: currentPost.title,
             excerpt: currentPost.excerpt,
             body: currentPost.body,
             tags: currentPost.tags[0],
             cover: null,
-        }
-        reset(defaultValues)
-    }, [reset, currentPost])
+        };
+        reset(defaultValues);
+    }, [reset, currentPost]);
 
     const editPost = useMutation(
         (data: any) => {
@@ -160,6 +165,34 @@ export const EditPostModal = () => {
                                 name="excerpt"
                                 className="input bg-base-200 input-md"
                             />
+                        </div>
+                        <div className="flex flex-col">
+                            {errors.author && (
+                                <p className="text-error">
+                                    {errors.author.message}
+                                </p>
+                            )}
+                            <label
+                                htmlFor="author"
+                                className="text-neutral-content"
+                            >
+                                Post&apos;s Author
+                            </label>
+                            <select
+                                {...register("author")}
+                                className="select bg-base-200 w-full max-w-xs"
+                                name="author"
+                                defaultValue="def"
+                            >
+                                <option value="def" disabled>
+                                    Pick Author
+                                </option>
+                                {authors?.map((author: IAuthor) => (
+                                    <option key={author.ID} value={author.name}>
+                                        {author.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="flex flex-col">
                             <label

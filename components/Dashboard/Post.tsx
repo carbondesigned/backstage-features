@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { IPost } from "types/posts";
 import api from "axiosStore";
 import { useAppContext } from "contexts/AppContext";
-import { useAuthor } from "hooks/useGetAuthor";
+import { useAuthors } from "hooks/useGetAuthors";
 
 type Props = {
   post: IPost;
@@ -12,7 +12,8 @@ type Props = {
 
 const Post = ({ post }: Props) => {
   const { setCurrentPost } = useAppContext();
-  const { data: author, isLoading, error } = useAuthor(post.author);
+  const { data: authors, isLoading, error } = useAuthors();
+  const author = authors?.find((author) => author.name === post.author);
   const queryClient = useQueryClient();
   const deletePost = useMutation(
     (slug: string) => {
@@ -56,20 +57,30 @@ const Post = ({ post }: Props) => {
                 ))}
               </div>
             )}
-            {isLoading && <p>Author is loading</p>}
-            {error && <p>Author errror</p>}
-            {author && (
-              <div className="flex gap-4 items-center">
-                <div className="w-8 h-8 bg-base-200 rounded-full"></div>
-                <p className="font-bold">
-                <span className="font-normal">{" "} By {" "}</span>
-                  {author.name}
-                </p>
-              </div>
-            )}
           </div>
-          <div className="flex justify-between mt-6">
-            <h4 className="text-2xl font-bold w-3/4">{post.title}</h4>
+          <div className="flex justify-between mt-2">
+            <div className="flex flex-col gap-4">
+              <h4 className="text-2xl font-bold w-3/4">{post.title}</h4>
+              {isLoading && <p>Author is loading</p>}
+              {error && <p>Author errror</p>}
+              {author && (
+                <div className="flex gap-4 items-center">
+                  <div className="w-8 h-8 bg-base-200 rounded-full relative">
+                    <Image
+                      src={author.image}
+                      alt={author.name}
+                      layout="fill"
+                      objectFit="cover"
+                      objectPosition="center"
+                    />
+                  </div>
+                  <p className="font-bold">
+                    <span className="font-normal"> By </span>
+                    {author.name}
+                  </p>
+                </div>
+              )}
+            </div>
             <div className="dropdown dropdown-top dropdown-end">
               <label tabIndex={0} className="cursor-pointer">
                 <svg

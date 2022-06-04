@@ -6,7 +6,6 @@ import { useMutation, useQueryClient } from "react-query";
 import api from "axiosStore";
 import { useRouter } from "next/router";
 import Input from "components/FormInput";
-import { useState } from "react";
 import { useAuthors } from "hooks/useGetAuthors";
 import { IAuthor } from "types/author";
 const CreatePostPage = () => {
@@ -128,8 +127,9 @@ const CreatePostPage = () => {
                   {...register("author")}
                   className="select bg-base-200 w-full max-w-xs"
                   name="author"
+                  defaultValue="def"
                 >
-                  <option disabled selected>
+                  <option value="def" disabled>
                     Pick Author
                   </option>
                   {authors?.map((author: IAuthor) => (
