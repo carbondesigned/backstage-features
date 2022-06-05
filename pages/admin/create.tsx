@@ -8,8 +8,12 @@ import { useRouter } from "next/router";
 import Input from "components/FormInput";
 import { useAuthors } from "hooks/useGetAuthors";
 import { IAuthor } from "types/author";
+import React from "react";
+import { MarkdownComponent } from "utils/Markdown";
+
 const CreatePostPage = () => {
   const { data: authors, isLoading, error } = useAuthors();
+  const [body, setBody] = React.useState<string>("")
   console.log(authors);
   const router = useRouter();
   const createPostValidation = z.object({
@@ -132,7 +136,8 @@ const CreatePostPage = () => {
                   <option value="def" disabled>
                     Pick Author
                   </option>
-                  {authors?.map((author: IAuthor) => (
+                  {isLoading && <option value="def">Loading...</option>}
+                  {!isLoading && authors?.map((author: IAuthor) => (
                     <option key={author.ID} value={author.name}>
                       {author.name}
                     </option>
@@ -161,10 +166,14 @@ const CreatePostPage = () => {
               </label>
               <textarea
                 {...register("body")}
+                onChange={(e) => setBody(e.target.value)}
                 name="body"
                 className="textarea bg-base-200"
                 rows={10}
               />
+            </div>
+            <div>
+              <MarkdownComponent>{body}</MarkdownComponent>
             </div>
             <div className="flex justify-end">
               <button className="btn btn-primary btn-lg" type="submit">
