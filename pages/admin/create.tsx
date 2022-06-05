@@ -10,11 +10,12 @@ import { useAuthors } from "hooks/useGetAuthors";
 import { IAuthor } from "types/author";
 import React from "react";
 import { MarkdownComponent } from "utils/Markdown";
+import { PreviewToggle } from "components/Dashboard/PreviewToggle";
 
 const CreatePostPage = () => {
   const { data: authors, isLoading, error } = useAuthors();
+  const [preview, setPreview] = React.useState<boolean>(false);
   const [body, setBody] = React.useState<string>("")
-  console.log(authors);
   const router = useRouter();
   const createPostValidation = z.object({
     title: z.string().nullable(),
@@ -35,7 +36,7 @@ const CreatePostPage = () => {
       cover: "",
       title: "",
       excerpt: "",
-      author: "",
+      author: "def",
       tags: "",
       body: "",
     },
@@ -159,6 +160,8 @@ const CreatePostPage = () => {
               />
             </div>
             {/* TODO: work with Marked to handle markdown  */}
+            <PreviewToggle onClick={() => setPreview(!preview)} preview={preview}/>
+            {!preview ? (
             <div className="flex flex-col gap-2">
               {errors.body && <div>{errors.body.message}</div>}
               <label htmlFor="body" className="text-xl text-neutral-content">
@@ -168,18 +171,21 @@ const CreatePostPage = () => {
                 {...register("body")}
                 onChange={(e) => setBody(e.target.value)}
                 name="body"
-                className="textarea bg-base-200"
-                rows={10}
+                className="textarea min-h-[35em] bg-base-200"
               />
             </div>
+            ) : (
             <div>
               <MarkdownComponent>{body}</MarkdownComponent>
             </div>
+            )}
+          {!preview && (
             <div className="flex justify-end">
               <button className="btn btn-primary btn-lg" type="submit">
                 Create
               </button>
             </div>
+          )}
           </form>
         </div>
       </DashboardLayout>
