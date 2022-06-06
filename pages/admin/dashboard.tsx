@@ -10,6 +10,7 @@ import DashboardLayout from "components/Layouts/DashbardNav";
 import { IPost } from "types/posts";
 import { useAppContext } from "contexts/AppContext";
 import { EditPostModal } from "components/Dashboard/EditPostModal";
+import Loading from "components/Loading";
 
 interface Token {
   email: string;
@@ -44,11 +45,7 @@ const Dashboard = () => {
             <a className="btn text-base-100 btn-lg bg-primary">Create</a>
           </Link>
         </div>
-        {isLoading && (
-          <div className="grid w-full place-items-center min-h-[30vh]">
-            <div className="loader ease-linear rounded-full border-4 border-t-4 border-primary-dark-400 h-12 w-12 mb-4"></div>
-          </div>
-        )}
+        {isLoading && <Loading />}
         {error && <p>Error: {error.message}</p>}
         {!isLoading && posts && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

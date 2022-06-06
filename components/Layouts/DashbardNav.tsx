@@ -30,6 +30,11 @@ const DashboardLayout = ({ children }: Props) => {
             <a>Albums</a>
           </Link>
           </li>
+          <li>
+          <Link href="/admin/images">
+            <a>Upload Images</a>
+          </Link>
+          </li>
         </ul>
       </div>
     </div>
