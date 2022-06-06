@@ -11,6 +11,7 @@ import { IAuthor } from "types/author";
 import React from "react";
 import { MarkdownComponent } from "utils/Markdown";
 import { PreviewToggle } from "components/Dashboard/PreviewToggle";
+import ImagePopup from "components/Dashboard/ImagePopup";
 
 const CreatePostPage = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const CreatePostPage = () => {
 
   const { data: authors, isLoading, error } = useAuthors();
   const [preview, setPreview] = React.useState<boolean>(false);
+  const [showImagePopup, setShowImagePopup] = React.useState<boolean>(false)
   const [body, setBody] = React.useState<string>("");
 
   React.useEffect(() => {
@@ -84,7 +86,8 @@ const CreatePostPage = () => {
   });
 
   return (
-    <div className="bg-neutral w-full min-h-screen text-base-100">
+    <div className="bg-neutral w-full min-h-screen text-base-100 relative">
+      {showImagePopup && <ImagePopup close={() => setShowImagePopup(false)} />}
       <DashboardLayout>
         <div className="mb-12">
           <h1 className="text-4xl font-bold">Create</h1>
@@ -177,22 +180,30 @@ const CreatePostPage = () => {
               preview={preview}
             />
             {!preview ? (
-              <div className="flex flex-col gap-2">
-                {errors.body && <div>{errors.body.message}</div>}
-                <label htmlFor="body" className="text-xl text-neutral-content">
-                  Body
-                </label>
-                <textarea
-                  {...register("body")}
-                  onChange={(e) => {
-                    setBody(e.target.value);
-                    localStorage.setItem("body", body);
-                  }}
-                  value={body}
-                  name="body"
-                  className="textarea min-h-[35em] bg-base-200"
-                />
-              </div>
+              <>
+                <div>
+                  <button className="btn btn-sm bg-base-200" onClick={() => setShowImagePopup(true)}>Image</button>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {errors.body && <div>{errors.body.message}</div>}
+                  <label
+                    htmlFor="body"
+                    className="text-xl text-neutral-content"
+                  >
+                    Body
+                  </label>
+                  <textarea
+                    {...register("body")}
+                    onChange={(e) => {
+                      setBody(e.target.value);
+                      localStorage.setItem("body", body);
+                    }}
+                    value={body}
+                    name="body"
+                    className="textarea min-h-[35em] bg-base-200"
+                  />
+                </div>
+              </>
             ) : (
               <div>
                 <MarkdownComponent>{body}</MarkdownComponent>
@@ -203,10 +214,13 @@ const CreatePostPage = () => {
                 <button className="btn btn-primary btn-lg" type="submit">
                   Create
                 </button>
-                <button onClick={() => {
-                  router.push("/admin/dashboard")
-                  localStorage.removeItem("body")
-                }} className="btn bg-base-200 btn-lg" type="submit">
+                <button
+                  onClick={() => {
+                    router.push("/admin/dashboard");
+                    localStorage.removeItem("body");
+                  }}
+                  className="btn bg-base-200 btn-lg"
+                >
                   Cancel
                 </button>
               </div>

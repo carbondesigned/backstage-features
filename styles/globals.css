@@ -8,6 +8,10 @@
   animation: spinner 1.5s linear infinite;
 }
 
+.image-popup {
+  animation: popup 200ms ease;
+}
+
 .markdown h1 {
   display: block;
   font-size: 2em;
@@ -131,6 +135,17 @@ s {
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(100%)
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes spinner {
