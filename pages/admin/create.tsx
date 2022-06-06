@@ -13,10 +13,21 @@ import { MarkdownComponent } from "utils/Markdown";
 import { PreviewToggle } from "components/Dashboard/PreviewToggle";
 
 const CreatePostPage = () => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const { data: authors, isLoading, error } = useAuthors();
   const [preview, setPreview] = React.useState<boolean>(false);
-  const [body, setBody] = React.useState<string>("")
-  const router = useRouter();
+  const [body, setBody] = React.useState<string>("");
+
+  React.useEffect(() => {
+    // if there is already body in localstorage, set to state
+    const bodyFromLocalStorage = localStorage.getItem("body");
+    if (bodyFromLocalStorage) {
+      setBody(bodyFromLocalStorage);
+    }
+  }, []);
+
   const createPostValidation = z.object({
     title: z.string().nullable(),
     excerpt: z.string().nullable(),
@@ -24,6 +35,7 @@ const CreatePostPage = () => {
     tags: z.string().nullable(),
     author: z.string(),
   });
+
   const {
     register,
     handleSubmit,
@@ -42,7 +54,6 @@ const CreatePostPage = () => {
     },
   });
 
-  const queryClient = useQueryClient();
   const createPost = useMutation(
     (data: any) => {
       const inputFile = document.getElementById("cover") as HTMLInputElement;
@@ -67,10 +78,11 @@ const CreatePostPage = () => {
       },
     }
   );
-  errors?.tags && console.log(errors.tags);
+
   const onSubmit = handleSubmit((data: any) => {
     createPost.mutate(data);
   });
+
   return (
     <div className="bg-neutral w-full min-h-screen text-base-100">
       <DashboardLayout>
@@ -138,11 +150,12 @@ const CreatePostPage = () => {
                     Pick Author
                   </option>
                   {isLoading && <option value="def">Loading...</option>}
-                  {!isLoading && authors?.map((author: IAuthor) => (
-                    <option key={author.ID} value={author.name}>
-                      {author.name}
-                    </option>
-                  ))}
+                  {!isLoading &&
+                    authors?.map((author: IAuthor) => (
+                      <option key={author.ID} value={author.name}>
+                        {author.name}
+                      </option>
+                    ))}
                 </select>
               </div>
               <Controller
@@ -159,33 +172,45 @@ const CreatePostPage = () => {
                 )}
               />
             </div>
-            {/* TODO: work with Marked to handle markdown  */}
-            <PreviewToggle onClick={() => setPreview(!preview)} preview={preview}/>
+            <PreviewToggle
+              onClick={() => setPreview(!preview)}
+              preview={preview}
+            />
             {!preview ? (
-            <div className="flex flex-col gap-2">
-              {errors.body && <div>{errors.body.message}</div>}
-              <label htmlFor="body" className="text-xl text-neutral-content">
-                Body
-              </label>
-              <textarea
-                {...register("body")}
-                onChange={(e) => setBody(e.target.value)}
-                name="body"
-                className="textarea min-h-[35em] bg-base-200"
-              />
-            </div>
+              <div className="flex flex-col gap-2">
+                {errors.body && <div>{errors.body.message}</div>}
+                <label htmlFor="body" className="text-xl text-neutral-content">
+                  Body
+                </label>
+                <textarea
+                  {...register("body")}
+                  onChange={(e) => {
+                    setBody(e.target.value);
+                    localStorage.setItem("body", body);
+                  }}
+                  value={body}
+                  name="body"
+                  className="textarea min-h-[35em] bg-base-200"
+                />
+              </div>
             ) : (
-            <div>
-              <MarkdownComponent>{body}</MarkdownComponent>
-            </div>
+              <div>
+                <MarkdownComponent>{body}</MarkdownComponent>
+              </div>
             )}
-          {!preview && (
-            <div className="flex justify-end">
-              <button className="btn btn-primary btn-lg" type="submit">
-                Create
-              </button>
-            </div>
-          )}
+            {!preview && (
+              <div className="flex flex-row-reverse gap-4">
+                <button className="btn btn-primary btn-lg" type="submit">
+                  Create
+                </button>
+                <button onClick={() => {
+                  router.push("/admin/dashboard")
+                  localStorage.removeItem("body")
+                }} className="btn bg-base-200 btn-lg" type="submit">
+                  Cancel
+                </button>
+              </div>
+            )}
           </form>
         </div>
       </DashboardLayout>
