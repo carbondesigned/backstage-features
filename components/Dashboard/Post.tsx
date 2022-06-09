@@ -1,34 +1,20 @@
 import Image from "next/image";
 import React from "react";
-import { useMutation, useQueryClient } from "react-query";
 import { IPost } from "types/posts";
-import api from "axiosStore";
 import { useAppContext } from "contexts/AppContext";
 import { useAuthors } from "hooks/useGetAuthors";
-
+import {useDeletePost} from 'hooks/useDeletePost'
 type Props = {
   post: IPost;
 };
 
 const Post = ({ post }: Props) => {
   const { setCurrentPost } = useAppContext();
+
   const { data: authors, isLoading, error } = useAuthors();
+  const {mutate: deletePost} = useDeletePost();
+
   const author = authors?.find((author) => author.name === post.author);
-  const queryClient = useQueryClient();
-  const deletePost = useMutation(
-    (slug: string) => {
-      return api.delete(`/posts/${slug}`, {
-        headers: {
-          Authorization: `${localStorage.getItem("token")}`,
-        },
-      });
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("posts");
-      },
-    }
-  );
   return (
     <>
       <div className="bg-base-300 card text-base-100 rounded-xl">
@@ -109,7 +95,7 @@ const Post = ({ post }: Props) => {
                   </li>
                 </label>
                 <li
-                  onClick={() => deletePost.mutate(post.slug)}
+                  onClick={() => deletePost(post.slug)}
                   className="bg-error"
                 >
                   <a>Delete</a>
