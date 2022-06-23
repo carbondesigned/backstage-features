@@ -1,7 +1,25 @@
 module.exports = {
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'indicator-bounce': 'indicator-bounce 0.5s ease-in-out',
+      },
+      keyframes: {
+        'indicator-bounce': {
+          '0%': {
+            transform: 'translateY(0)',
+          },
+          '50%': {
+            transform: 'translateY(10px)',
+          },
+
+          '100%': {
+            transform: 'translateY(0)',
+          },
+        },
+      },
+    },
   },
   daisyui: {
     themes: [
