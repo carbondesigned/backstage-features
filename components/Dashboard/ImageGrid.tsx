@@ -7,7 +7,7 @@ type Props = {
 
 const ImageGrid = ({ images }: Props) => {
   return (
-    <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
+    <div className="grid gap-10 grid-cols-1 lg:grid-cols-3">
       {images.map((image) => (
         <div
           data-tip="Copy Image URL"

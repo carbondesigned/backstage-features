@@ -46,6 +46,7 @@ const UploadCoverInput = ({ error, name, label, ...props }: Props) => {
           {hasFiles ? 'Change' : 'Upload'}
         </div>
         <input
+          id='image'
           tabIndex={0}
           ref={inputRef}
           {...props}

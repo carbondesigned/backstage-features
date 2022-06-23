@@ -4,9 +4,10 @@ import { Controller, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { z } from "zod";
 import api from 'axiosStore'
+import UploadCoverInput from "./UploadCoverInput";
 
 const UploadImageModal = () => {
-const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
   const uploadImageValidation = z.object({
     alt: z.string(),
   });
@@ -53,24 +54,24 @@ const queryClient = useQueryClient()
           >
             x
           </label>
-          <h3 className="text-4xl font-bold">Edit Post</h3>
-          <form onSubmit={onSubmit}>
-            <div className="flex flex-col gap-2 flex-1">
-              <label htmlFor="image">Image</label>
-              <input
-                {...register("image")}
-                id="image"
-                className="input input-md bg-base-200"
-                type="file"
-                name="image"
-              />
-            </div>
+          <h3 className="text-4xl font-bold">Upload Image</h3>
+          <form className="mt-6 gap-6 flex flex-col" onSubmit={onSubmit}>
+            <Controller
+              control={control}
+              name="image"
+              render={({ field }) => (
+                <UploadCoverInput
+                  {...register("image")}
+                  {...field} name="image" label="Image" error={errors?.image?.message} />
+              )}
+            />
             <Controller
               control={control}
               name="alt"
               render={({ field }) => (
                 <Input
                   {...field}
+                  {...register("alt")}
                   label="Image Description"
                   name="alt"
                   error={errors?.alt?.message}
