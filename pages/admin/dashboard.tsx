@@ -11,6 +11,7 @@ import { IPost } from 'types/posts';
 import { useAppContext } from 'contexts/AppContext';
 import { EditPostModal } from 'components/Dashboard/EditPostModal';
 import Loading from 'components/Loading';
+import PageHeader from 'components/Dashboard/PageHeader';
 
 interface Token {
   email: string;
@@ -39,14 +40,9 @@ const Dashboard = () => {
     <div className='min-h-screen bg-neutral flex gap-12'>
       {currentPost && <EditPostModal />}
       <DashboardLayout>
-        <div className='text-base-100 py-6 flex w-full justify-between items-center'>
-          <h1 className='text-4xl'>Dashboard</h1>
-          <Link href='/admin/create'>
-            <a className='btn text-base-100 btn-lg bg-primary'>Create</a>
-          </Link>
-        </div>
+        <PageHeader title="Dashboard" url="/admin/create" btnTitle="Create"/>
         {isLoading && <Loading />}
-        {error && <p>Error: {error.message}</p>}
+        {error && <p className="text-error">Error: {error.message}</p>}
         {!isLoading && posts && (
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {posts.map((post: IPost) => (

@@ -35,6 +35,7 @@ const AdminHome = (props: Props) => {
         if (res.status === 200) {
           localStorage.setItem("token", res.data.token);
           router.push("/admin/dashboard");
+          setSigninErrors("");
           reset();
         }
       })
