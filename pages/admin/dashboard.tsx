@@ -5,7 +5,6 @@ import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useEffect } from 'react';
-import Link from 'next/link';
 import DashboardLayout from 'components/Layouts/DashbardNav';
 import { IPost } from 'types/posts';
 import { useAppContext } from 'contexts/AppContext';

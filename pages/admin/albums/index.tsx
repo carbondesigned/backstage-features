@@ -6,7 +6,7 @@ const Albums: NextPage = () => {
   return (
     <div className="min-h-screen bg-neutral flex gap-12">
       <DashboardLayout>
-        <PageHeader title="Albums" url="/admin/albums" btnTitle="Create" />
+        <PageHeader title="Albums" url="/admin/albums/create" btnTitle="Create" />
       </DashboardLayout>
     </div>
   );
