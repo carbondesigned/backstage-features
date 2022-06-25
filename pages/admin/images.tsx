@@ -4,7 +4,6 @@ import DashboardLayout from 'components/Layouts/DashbardNav';
 import Loading from 'components/Loading';
 import { useImages } from 'hooks/useGetImages';
 import { NextPage } from 'next';
-import Image from 'next/image';
 
 const ImagesPage: NextPage = () => {
   const { data: images, isLoading, error } = useImages();

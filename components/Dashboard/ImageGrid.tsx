@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import React from 'react';
-import type { IImage } from 'types/images';
-import Alert from './Alert';
+import Image from "next/image";
+import React from "react";
+import type { IImage } from "types/images";
+import Alert from "./Alert";
 
 type Props = {
   images: IImage[];
@@ -12,36 +12,26 @@ const ImageGrid = ({ images }: Props) => {
 
   /* It's checking if the clipboard contains a url (more specifically just a image url). If it does, it sets the copied state to true. */
   React.useEffect(() => {
-    // if the clipboard contains a url
-    navigator.clipboard
-      .readText()
-      .then((text) => {
-        if (text.includes('https://')) {
-          setCopied(true);
-        }
-      })
-      .catch((err) => console.error(err));
-
     setTimeout(() => {
       setCopied(false);
     }, 7000);
-  }, [copied]);
+  }, [copied, navigator.clipboard]);
 
   return (
-    <div className='grid gap-10 grid-cols-1 lg:grid-cols-3'>
+    <div className="grid gap-10 grid-cols-1 lg:grid-cols-3">
       <Alert
-        message='Successfully copied image URL!'
+        message="Successfully copied image URL!"
         show={copied}
-        alert='success'
+        alert="success"
       />
       {images.map((image) => (
         <div
-          data-tip='Copy Image URL'
+          data-tip="Copy Image URL"
           key={image.ID}
-          className='tooltip tooltip-bottom cursor-pointer'
+          className="tooltip tooltip-bottom cursor-pointer"
         >
           <div
-            className='relative w-full h-64 rounded-xl overflow-hidden duration-200 hover:scale-105'
+            className="relative w-full h-64 rounded-xl overflow-hidden duration-200 hover:scale-105"
             onClick={() => {
               navigator.clipboard.writeText(image.imageURL);
               setCopied(true);
@@ -50,9 +40,9 @@ const ImageGrid = ({ images }: Props) => {
             <Image
               src={image.imageURL}
               alt={image.alt}
-              layout='fill'
-              objectFit='cover'
-              objectPosition='center'
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
             />
           </div>
         </div>
