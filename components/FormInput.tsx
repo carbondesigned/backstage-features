@@ -28,7 +28,7 @@ const Input = ({
         id={id}
         type={type}
         name={name}
-        className="input input-md bg-base-200"
+        className="input text-base-100 text-lg input-md bg-base-200"
       />
     </div>
   );

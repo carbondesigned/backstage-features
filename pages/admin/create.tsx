@@ -205,7 +205,7 @@ const CreatePostPage = () => {
                     }}
                     value={body}
                     name='body'
-                    className='textarea min-h-[35em] bg-base-200'
+                    className='textarea text-lg font-medium min-h-[35em] bg-base-200'
                   />
                 </div>
               </>
