@@ -3,7 +3,7 @@ import React from "react";
 import { IPost } from "types/posts";
 import { useAppContext } from "contexts/AppContext";
 import { useAuthors } from "hooks/useGetAuthors";
-import {useDeletePost} from 'hooks/useDeletePost'
+import { useDeletePost } from "hooks/useDeletePost";
 type Props = {
   post: IPost;
 };
@@ -12,7 +12,7 @@ const Post = ({ post }: Props) => {
   const { setCurrentPost } = useAppContext();
 
   const { data: authors, isLoading, error } = useAuthors();
-  const {mutate: deletePost} = useDeletePost();
+  const { mutate: deletePost } = useDeletePost();
 
   const author = authors?.find((author) => author.name === post.author);
   return (
@@ -30,7 +30,7 @@ const Post = ({ post }: Props) => {
           </figure>
         )}
         <div className="card-body">
-          <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between gap-2">
             {post.tags[0].length > 0 && (
               <div className="flex items-center gap-2">
                 {post.tags[0]?.split(",").map((tag: string) => (
@@ -43,6 +43,23 @@ const Post = ({ post }: Props) => {
                 ))}
               </div>
             )}
+            <div className="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 fill-error"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="w-10 h-10 grid place-items-center rounded-full bg-base-200">
+                {post.likes}
+              </span>
+            </div>
           </div>
           <div className="flex justify-between mt-2">
             <div className="flex flex-col gap-4">
@@ -94,10 +111,7 @@ const Post = ({ post }: Props) => {
                     <a>Edit</a>
                   </li>
                 </label>
-                <li
-                  onClick={() => deletePost(post.slug)}
-                  className="bg-error"
-                >
+                <li onClick={() => deletePost(post.slug)} className="bg-error">
                   <a>Delete</a>
                 </li>
               </ul>
