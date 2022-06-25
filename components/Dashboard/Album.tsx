@@ -4,6 +4,7 @@ import { useAppContext } from "contexts/AppContext";
 import { IAlbum } from "types/album";
 import { useDeleteAlbum } from "hooks/useDeleteAlbum";
 import Link from "next/link";
+
 type Props = {
   album: IAlbum;
 };
