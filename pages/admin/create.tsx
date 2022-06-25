@@ -59,7 +59,7 @@ const CreatePostPage = () => {
 
   const createPost = useMutation(
     (data: any) => {
-      const inputFile = document.getElementById('cover') as HTMLInputElement;
+      const inputFile = document.getElementById('image') as HTMLInputElement;
       const formData = new FormData();
       formData.append('title', data.title);
       formData.append('excerpt', data.excerpt);
