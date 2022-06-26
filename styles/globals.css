@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: "Poppins", sans-serif;
+}
+
 .loader {
   @apply border-t-primary;
   -webkit-animation: spinner 1.5s linear infinite;
@@ -140,7 +144,7 @@ s {
 @keyframes popup {
   0% {
     opacity: 0;
-    transform: translateY(100%)
+    transform: translateY(100%);
   }
   100% {
     transform: translateY(0);

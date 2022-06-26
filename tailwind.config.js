@@ -2,6 +2,9 @@ module.exports = {
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        "8xl": "6rem",
+      },
       animation: {
         "indicator-bounce": "indicator-bounce 0.5s ease-in-out",
         "slide-up": "slide-up 5s ease-in-out",
