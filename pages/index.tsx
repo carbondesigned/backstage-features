@@ -1,5 +1,7 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import type { NextPage } from "next"
+import Head from "next/head"
+import Image from "next/image"
+import Link from "next/link"
 
 const Home: NextPage = () => {
   return (
@@ -10,11 +12,41 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        <h1 className='text-primary text-2xl'>test</h1>
+      <main className='min-h-screen bg-neutral lg:p-32'>
+        <section className='bg-base-300 text-white p-12 rounded-xl flex justify-between items-center'>
+          <div className='flex flex-col gap-4'>
+            <h1 className='text-6xl font-bold max-w-[10ch]'>
+              Backstage Features
+            </h1>
+            <div className='flex flex-col gap-2'>
+              <p className='text-neutral-content text-xl max-w-[60ch]'>
+                Interviews, coverages, people, get backstage info about your
+                favorite celeb from Backstage Features & Gracie Lowes
+              </p>
+              <div className='flex gap-4'>
+                {/* TODO: change link when avail */}
+                <Link href='/'>
+                  <a className='btn btn-primary'>Contact</a>
+                </Link>
+                <Link href='/'>
+                  <a className='btn btn-outline text-white'>Read More</a>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div>
+            <Image
+              src='/images/hero-img.svg'
+              alt='Backstage Features by Gracie Lowes'
+              layout='fixed'
+              width={500}
+              height={500}
+            />
+          </div>
+        </section>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
