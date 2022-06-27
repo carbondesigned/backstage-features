@@ -1,3 +1,4 @@
+import { Line } from "components/Misc/Line"
 import { useAuthors } from "hooks/useGetAuthors"
 import { useLikePost } from "hooks/useLikePost"
 import Image from "next/image"
@@ -31,7 +32,21 @@ export const NormalPost = ({
 }) => {
   const { mutate: likePost } = useLikePost()
   return (
-    <div className='bg-base-300 p-4 card text-base-100 rounded-xl'>
+    <div className='bg-base-300 relative p-4 card text-base-100 rounded-xl'>
+      {/* brand style around post (lines) */}
+      <div className='absolute top-0 -left-10 z-50'>
+        <Line line='purple-thick' />
+      </div>
+      <div className='absolute bottom-52 -right-10'>
+        <Line line='yellow-thick' />
+      </div>
+      <div className='absolute bottom-80 -right-10'>
+        <Line line='blue-sm' />
+      </div>
+      <div className='absolute bottom-62 -left-10'>
+        <Line line='red-md' />
+      </div>
+
       {post.cover && (
         <figure className='w-full h-72 overflow-hidden rounded-xl relative'>
           <div className='inset-0 absolute bg-gradient-to-t from-black to-transparent z-30 pointer-events-none'></div>
@@ -48,10 +63,10 @@ export const NormalPost = ({
                 ))}
               </div>
             )}
-            <div className='flex items-center gap-2'>
+            <div className='flex bg-base-200 rounded-full justify-between items-center gap-2'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                className='h-8 w-8 fill-error'
+                className='h-8 w-8 fill-error ml-2'
                 viewBox='0 0 20 20'
                 fill='currentColor'
               >
@@ -63,7 +78,7 @@ export const NormalPost = ({
               </svg>
               <span
                 onClick={() => likePost(post.slug)}
-                className='cursor-pointer w-10 h-10 grid place-items-center rounded-full bg-base-200'
+                className='cursor-pointer w-10 h-10 grid place-items-center rounded-full bg-base-300'
               >
                 {post.likes}
               </span>
@@ -81,7 +96,7 @@ export const NormalPost = ({
       <div className='card-body px-0'>
         <div className='flex justify-between mt-2'>
           <div className='flex flex-col gap-4'>
-            <div className='flex gap-2 items-center'>
+            <div className='flex gap-2 items-center bg-base-300 z-50'>
               {author && (
                 <div className='flex gap-4 items-center'>
                   <div className='w-8 h-8 bg-base-200 rounded-full relative'>
