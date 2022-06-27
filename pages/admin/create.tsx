@@ -32,9 +32,9 @@ const CreatePostPage = () => {
   }, [])
 
   const createPostValidation = z.object({
-    title: z.string().nullable(),
+    title: z.string(),
     excerpt: z.string().nullable(),
-    body: z.string().nullable(),
+    body: z.string(),
     tags: z.string().nullable(),
     author: z.string(),
   })
@@ -77,6 +77,7 @@ const CreatePostPage = () => {
       onSuccess: () => {
         queryClient.invalidateQueries("posts")
         router.push("/admin/dashboard")
+        localStorage.removeItem("body")
         reset()
       },
     }
@@ -183,6 +184,7 @@ const CreatePostPage = () => {
               <>
                 <div>
                   <button
+                    type='button'
                     className='btn btn-sm bg-base-200'
                     onClick={() => setShowImagePopup(true)}
                   >
@@ -214,22 +216,20 @@ const CreatePostPage = () => {
                 <MarkdownComponent>{body}</MarkdownComponent>
               </div>
             )}
-            {!preview && (
-              <div className='flex flex-row-reverse gap-4'>
-                <button className='btn btn-primary btn-lg' type='submit'>
-                  Create
-                </button>
-                <button
-                  onClick={() => {
-                    router.push("/admin/dashboard")
-                    localStorage.removeItem("body")
-                  }}
-                  className='btn bg-base-200 btn-lg'
-                >
-                  Cancel
-                </button>
-              </div>
-            )}
+
+            <div className='flex flex-row-reverse gap-4'>
+              <button className='btn btn-primary btn-lg' type='submit'>
+                Create
+              </button>
+              <button
+                onClick={() => {
+                  router.push("/admin/dashboard")
+                }}
+                className='btn bg-base-200 btn-lg'
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       </DashboardLayout>
