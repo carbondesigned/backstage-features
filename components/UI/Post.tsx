@@ -33,7 +33,7 @@ export const NormalPost = ({
 }) => {
   const { mutate: likePost } = useLikePost()
   return (
-    <div className='bg-base-300 relative p-4 card text-base-100 rounded-xl'>
+    <div className='bg-base-300 post-border border-gradient cursor-pointer relative p-4 card text-base-100 rounded-xl'>
       {/* brand style around post (lines) */}
       <div className='absolute top-0 -left-10 z-50'>
         <Line line='purple-thick' />

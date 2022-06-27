@@ -6,6 +6,58 @@ html {
   font-family: "Poppins", sans-serif;
 }
 
+/* .border-gradient { */
+/*   border: 10px solid; */
+/*   border-image-slice: 1; */
+/*   border-width: 5px; */
+/* } */
+
+.post-border {
+  /* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
+  /* border-radius: 2em; */
+  position: relative;
+}
+
+.post-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  transition: 500ms ease;
+  padding: 0.2rem;
+  opacity: 0;
+}
+
+.post-border:hover::after {
+  opacity: 1;
+  padding: 0.2rem;
+  background-image: linear-gradient(
+    to bottom left,
+    #ec6c5a 0% 15%,
+    #f4dc5a 15% 60%,
+    #6e8eff 60% 85%,
+    #8d55e9 85% 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient 5s linear infinite;
+}
+
+/* create a keyframe that will rotate the gradient */
+@keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
 .loader {
   @apply border-t-primary;
   -webkit-animation: spinner 1.5s linear infinite;
