@@ -28,6 +28,31 @@ html {
   opacity: 0;
 }
 
+.post-border-always {
+  position: relative;
+}
+
+.post-border-always::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  transition: 500ms ease;
+  padding: 0.25rem;
+  background-image: linear-gradient(
+    to bottom left,
+    #ec6c5a 0% 15%,
+    #f4dc5a 15% 60%,
+    #6e8eff 60% 85%,
+    #8d55e9 85% 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient 15s linear infinite reverse;
+}
+
 .post-border:hover::after {
   opacity: 1;
   padding: 0.2rem;
@@ -42,7 +67,8 @@ html {
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: gradient 5s linear infinite;
+  animation: gradient 15s linear infinite;
+  animation-direction: alternate-reverse;
 }
 
 /* create a keyframe that will rotate the gradient */

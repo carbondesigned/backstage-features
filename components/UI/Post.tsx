@@ -33,7 +33,7 @@ export const NormalPost = ({
 }) => {
   const { mutate: likePost } = useLikePost()
   return (
-    <div className='bg-base-300 post-border border-gradient cursor-pointer relative p-4 card text-base-100 rounded-xl'>
+    <div className='bg-base-300 border-[2px] hover:border-opacity-0 border-opacity-30 border-neutral-content post-border border-gradient cursor-pointer relative p-4 card text-base-100 rounded-xl'>
       {/* brand style around post (lines) */}
       <div className='absolute top-0 -left-10 z-50'>
         <Line line='purple-thick' />
@@ -148,9 +148,9 @@ export const LatestPost = ({
 }) => {
   const { mutate: likePost } = useLikePost()
   return (
-    <div className='card lg:card-side bg-base-300 shadow-xl lg:h-[30em] p-6'>
+    <div className='card rounded-xl lg:card-side border-gradient post-border-always bg-base-300 shadow-xl lg:h-[30em] p-6'>
       {post.cover && (
-        <figure className='w-full h-72 lg:h-full overflow-hidden rounded-xl relative'>
+        <figure className='w-full flex-2 h-72 lg:h-full overflow-hidden rounded-xl relative'>
           <div className='inset-0 absolute bg-gradient-to-t from-black to-transparent z-30 pointer-events-none'></div>
           <div className='flex z-50 h-fit justify-between self-start w-full gap-2 p-4'>
             {post.tags[0].length > 0 && (
