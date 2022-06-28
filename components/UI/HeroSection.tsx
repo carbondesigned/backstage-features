@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export const HeroSection = () => {
   return (
-    <section className='bg-base-300 mt-32 left text-white p-12 md:px-20 lg:px-32 rounded-xl flex flex-col-reverse lg:flex-row items-center'>
+    <section className='bg-base-300 mt-32 z-50 left text-white p-12 md:px-20 lg:px-32 rounded-xl flex flex-col-reverse lg:flex-row items-center'>
       <div className='flex flex-1 flex-col gap-4'>
         <h1 className='text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-none font-bold lg:max-w-[10ch]'>
           Backstage Features
