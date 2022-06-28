@@ -13,7 +13,6 @@ const Home: NextPage = () => {
           name='description'
           content='Backstage Features by Gracie Lowes. Interviews, coverages, people, get backstage info about your favorite celeb!'
         />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <Layout>

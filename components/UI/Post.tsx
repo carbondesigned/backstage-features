@@ -33,18 +33,22 @@ export const NormalPost = ({
 }) => {
   const { mutate: likePost } = useLikePost()
   return (
-    <div className='bg-base-300 z-10 border-[2px] hover:border-opacity-0 border-opacity-30 border-neutral-content post-border border-gradient cursor-pointer relative p-4 card text-base-100 rounded-xl'>
+    <div
+      className='post bg-base-300 z-10 border-[2px] hover:border-opacity-0 
+                border-opacity-30 border-neutral-content post-border border-gradient 
+                cursor-pointer relative p-4 card text-base-100 rounded-xl'
+    >
       {/* brand style around post (lines) */}
-      <div className='absolute top-0 -left-10 z-50'>
+      <div className='line absolute top-0 -left-10 z-50'>
         <Line line='purple-thick' />
       </div>
-      <div className='absolute top-48 -right-10'>
+      <div className='line absolute top-48 -right-10'>
         <Line line='yellow-thick' />
       </div>
-      <div className='absolute top-24 -right-10'>
+      <div className='line absolute top-24 -right-10'>
         <Line line='blue-sm' />
       </div>
-      <div className='absolute bottom-62 -left-10'>
+      <div className='line absolute bottom-62 -left-10'>
         <Line line='red-md' />
       </div>
 
@@ -129,7 +133,7 @@ export const NormalPost = ({
           </div>
         </div>
         <p className='text-neutral-content'>{post?.excerpt}</p>
-        <div className='mt-6'>
+        <div className='mt-6 z-40'>
           <Link href={post.slug}>
             <a className='btn btn-primary px-8'>View</a>
           </Link>
@@ -148,10 +152,26 @@ export const LatestPost = ({
 }) => {
   const { mutate: likePost } = useLikePost()
   return (
-    <div className='card rounded-xl lg:card-side border-gradient post-border-always bg-base-300 shadow-xl lg:h-[30em] p-6'>
+    <div className='post card rounded-xl relative z-30 lg:card-side border-gradient post-border-always bg-base-300 shadow-xl lg:h-[30em] p-6'>
+      {/* brand style around post (lines) */}
+      <div className='line absolute top-0 -left-10 z-50'>
+        <Line line='purple-thick' />
+      </div>
+      <div className='line absolute -bottom-20 left-[40em] z-50'>
+        <Line line='yellow-thick' />
+      </div>
+      <div className='line absolute -bottom-10 left-96'>
+        <Line line='blue-sm' />
+      </div>
+      <div className='line absolute -top-10 left-[35em]'>
+        <Line line='blue-sm' />
+      </div>
+      <div className='line absolute bottom-62 -left-10'>
+        <Line line='red-md' />
+      </div>
       {post.cover && (
         <figure className='w-full flex-2 h-72 lg:h-full overflow-hidden rounded-xl relative'>
-          <div className='inset-0 absolute bg-gradient-to-t from-black to-transparent z-30 pointer-events-none'></div>
+          <div className='inset-0 absolute bg-gradient-to-t from-transparent to-black z-30 pointer-events-none'></div>
           <div className='flex z-50 h-fit justify-between self-start w-full gap-2 p-4'>
             {post.tags[0].length > 0 && (
               <div className='flex z-50 items-center gap-2'>
@@ -230,7 +250,7 @@ export const LatestPost = ({
           </div>
         </div>
         <p className='text-neutral-content'>{post.excerpt}</p>
-        <div className='card-actions justify-start mt-4'>
+        <div className='card-actions justify-start mt-4 z-40'>
           <Link href={post.slug}>
             <a className='btn btn-primary px-6'>View</a>
           </Link>

@@ -6,15 +6,7 @@ html {
   font-family: "Poppins", sans-serif;
 }
 
-/* .border-gradient { */
-/*   border: 10px solid; */
-/*   border-image-slice: 1; */
-/*   border-width: 5px; */
-/* } */
-
 .post-border {
-  /* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
-  /* border-radius: 2em; */
   position: relative;
 }
 
@@ -69,6 +61,14 @@ html {
   mask-composite: exclude;
   animation: gradient 15s linear infinite;
   animation-direction: alternate-reverse;
+}
+
+.line {
+  transition: 200ms ease;
+}
+
+.post:hover .line {
+  transform: scale(1.25);
 }
 
 /* create a keyframe that will rotate the gradient */
