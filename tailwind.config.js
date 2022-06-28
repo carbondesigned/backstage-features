@@ -8,8 +8,28 @@ module.exports = {
       animation: {
         "indicator-bounce": "indicator-bounce 0.5s ease-in-out",
         "slide-up": "slide-up 5s ease-in-out",
+        "nav-fade": "nav-fade 200ms ease",
+        "nav-links-slide": "nav-links-slide 200ms ease",
       },
       keyframes: {
+        "nav-fade": {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
+        "nav-links-slide": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(100%)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+        },
         "indicator-bounce": {
           "0%": {
             transform: "translateY(0)",
