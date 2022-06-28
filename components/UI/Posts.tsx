@@ -1,4 +1,5 @@
 import Loading from "components/Loading"
+import Section from "components/Section"
 import { usePosts } from "hooks/usePosts"
 import React from "react"
 import { IPost } from "types/posts"
@@ -21,12 +22,12 @@ export const Posts = () => {
     //.slice(0, 3))
   }, [posts, latestPost])
   return (
-    <section className='text-base-100 mt-24'>
-      <h2 className='text-4xl lg:text-5xl font-bold'>Recent Posts</h2>
-      <p className='text-neutral-content mb-12 my-4 lg:text-lg max-w-[60ch]'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. A leo arcu
-        sapien lobortis. Sed lacus sapien pulvinar.
-      </p>
+    <Section
+      title='Recent Post'
+      subtitle='Lorem ipsum dolor sit amet, consectetur adipiscing elit. A leo arcusapien lobortis. Sed lacus sapien pulvinar.'
+      btnText='View All Posts'
+      btnLink='/posts'
+    >
       {isLoading && <Loading />}
       <div className='mb-6'>
         {latestPost && <Post post={latestPost as IPost} type='latest' />}
@@ -37,6 +38,6 @@ export const Posts = () => {
             <Post post={post} key={idx} type='normal' />
           ))}
       </div>
-    </section>
+    </Section>
   )
 }
