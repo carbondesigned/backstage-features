@@ -1,3 +1,4 @@
+import Layout from "components/Layouts/Layout"
 import { HeroSection } from "components/UI/HeroSection"
 import { Posts } from "components/UI/Posts"
 import type { NextPage } from "next"
@@ -15,10 +16,10 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='min-h-screen bg-neutral p-6 lg:p-32'>
+      <Layout>
         <HeroSection />
         <Posts />
-      </main>
+      </Layout>
     </div>
   )
 }

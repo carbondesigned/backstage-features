@@ -19,7 +19,7 @@ export const Posts = () => {
     )
     setRestOfPosts(posts?.filter((post) => post.ID !== latestPost?.ID))
     //.slice(0, 3))
-  }, [posts, latestPost, restOfPosts])
+  }, [posts, latestPost])
   return (
     <section className='text-base-100 mt-24'>
       <h2 className='text-4xl lg:text-5xl font-bold'>Recent Posts</h2>
