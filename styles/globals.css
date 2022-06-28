@@ -2,6 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+.post-border {
+  position: relative;
+}
+
+.post-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  transition: 500ms ease;
+  padding: 0.2rem;
+  opacity: 0;
+}
+
+.post-border-always {
+  position: relative;
+}
+
+.post-border-always::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  transition: 500ms ease;
+  padding: 0.25rem;
+  background-image: linear-gradient(
+    to bottom left,
+    #ec6c5a 0% 15%,
+    #f4dc5a 15% 60%,
+    #6e8eff 60% 85%,
+    #8d55e9 85% 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient 15s linear infinite reverse;
+}
+
+.post-border:hover::after {
+  opacity: 1;
+  padding: 0.2rem;
+  background-image: linear-gradient(
+    to bottom left,
+    #ec6c5a 0% 15%,
+    #f4dc5a 15% 60%,
+    #6e8eff 60% 85%,
+    #8d55e9 85% 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient 15s linear infinite;
+  animation-direction: alternate-reverse;
+}
+
+.line {
+  transition: 200ms ease;
+}
+
+.post:hover .line {
+  transform: scale(1.25);
+}
+
+/* create a keyframe that will rotate the gradient */
+@keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
 .loader {
   @apply border-t-primary;
   -webkit-animation: spinner 1.5s linear infinite;
@@ -140,7 +222,7 @@ s {
 @keyframes popup {
   0% {
     opacity: 0;
-    transform: translateY(100%)
+    transform: translateY(100%);
   }
   100% {
     transform: translateY(0);

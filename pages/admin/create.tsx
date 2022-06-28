@@ -1,43 +1,43 @@
-import DashboardLayout from 'components/Layouts/DashbardNav';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
-import api from 'axiosStore';
-import { useRouter } from 'next/router';
-import Input from 'components/FormInput';
-import { useAuthors } from 'hooks/useGetAuthors';
-import { IAuthor } from 'types/author';
-import React from 'react';
-import { MarkdownComponent } from 'utils/Markdown';
-import { PreviewToggle } from 'components/Dashboard/PreviewToggle';
-import ImagePopup from 'components/Dashboard/ImagePopup';
-import UploadCoverInput from 'components/Dashboard/UploadCoverInput';
+import DashboardLayout from "components/Layouts/DashbardNav"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Controller, useForm } from "react-hook-form"
+import { useMutation, useQueryClient } from "react-query"
+import api from "axiosStore"
+import { useRouter } from "next/router"
+import Input from "components/FormInput"
+import { useAuthors } from "hooks/useGetAuthors"
+import { IAuthor } from "types/author"
+import React from "react"
+import { MarkdownComponent } from "utils/Markdown"
+import { PreviewToggle } from "components/Dashboard/PreviewToggle"
+import ImagePopup from "components/Dashboard/ImagePopup"
+import UploadCoverInput from "components/Dashboard/UploadCoverInput"
 
 const CreatePostPage = () => {
-  const router = useRouter();
-  const queryClient = useQueryClient();
+  const router = useRouter()
+  const queryClient = useQueryClient()
 
-  const { data: authors, isLoading, error } = useAuthors();
-  const [preview, setPreview] = React.useState<boolean>(false);
-  const [showImagePopup, setShowImagePopup] = React.useState<boolean>(false);
-  const [body, setBody] = React.useState<string>('');
+  const { data: authors, isLoading, error } = useAuthors()
+  const [preview, setPreview] = React.useState<boolean>(false)
+  const [showImagePopup, setShowImagePopup] = React.useState<boolean>(false)
+  const [body, setBody] = React.useState<string>("")
 
   React.useEffect(() => {
     // if there is already body in localstorage, set to state
-    const bodyFromLocalStorage = localStorage.getItem('body');
+    const bodyFromLocalStorage = localStorage.getItem("body")
     if (bodyFromLocalStorage) {
-      setBody(bodyFromLocalStorage);
+      setBody(bodyFromLocalStorage)
     }
-  }, []);
+  }, [])
 
   const createPostValidation = z.object({
-    title: z.string().nullable(),
+    title: z.string(),
     excerpt: z.string().nullable(),
-    body: z.string().nullable(),
+    body: z.string(),
     tags: z.string().nullable(),
     author: z.string(),
-  });
+  })
 
   const {
     register,
@@ -48,43 +48,44 @@ const CreatePostPage = () => {
   } = useForm({
     resolver: zodResolver(createPostValidation),
     defaultValues: {
-      cover: '',
-      title: '',
-      excerpt: '',
-      author: 'def',
-      tags: '',
-      body: '',
+      cover: "",
+      title: "",
+      excerpt: "",
+      author: "def",
+      tags: "",
+      body: "",
     },
-  });
+  })
 
   const createPost = useMutation(
     (data: any) => {
-      const inputFile = document.getElementById('image') as HTMLInputElement;
-      const formData = new FormData();
-      formData.append('title', data.title);
-      formData.append('excerpt', data.excerpt);
-      formData.append('body', data.body);
-      formData.append('tags', data.tags.split(','));
-      formData.append('author', data.author);
-      formData.append('cover', inputFile.files?.item(0) as File);
+      const inputFile = document.getElementById("image") as HTMLInputElement
+      const formData = new FormData()
+      formData.append("title", data.title)
+      formData.append("excerpt", data.excerpt)
+      formData.append("body", data.body)
+      formData.append("tags", data.tags.split(","))
+      formData.append("author", data.author)
+      formData.append("cover", inputFile.files?.item(0) as File)
       return api.post(`/posts/create`, formData, {
         headers: {
-          Authorization: `${localStorage.getItem('token')}`,
+          Authorization: `${localStorage.getItem("token")}`,
         },
-      });
+      })
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('posts');
-        router.push('/admin/dashboard');
-        reset();
+        queryClient.invalidateQueries("posts")
+        router.push("/admin/dashboard")
+        localStorage.removeItem("body")
+        reset()
       },
     }
-  );
+  )
 
   const onSubmit = handleSubmit((data: any) => {
-    createPost.mutate(data);
-  });
+    createPost.mutate(data)
+  })
 
   return (
     <div className='bg-neutral w-full min-h-screen text-base-100 relative'>
@@ -144,7 +145,7 @@ const CreatePostPage = () => {
                   Author
                 </label>
                 <select
-                  {...register('author')}
+                  {...register("author")}
                   className='select bg-base-200 w-full max-w-xs'
                   name='author'
                   defaultValue='def'
@@ -183,6 +184,7 @@ const CreatePostPage = () => {
               <>
                 <div>
                   <button
+                    type='button'
                     className='btn btn-sm bg-base-200'
                     onClick={() => setShowImagePopup(true)}
                   >
@@ -198,10 +200,10 @@ const CreatePostPage = () => {
                     Body
                   </label>
                   <textarea
-                    {...register('body')}
+                    {...register("body")}
                     onChange={(e) => {
-                      setBody(e.target.value);
-                      localStorage.setItem('body', body);
+                      setBody(e.target.value)
+                      localStorage.setItem("body", body)
                     }}
                     value={body}
                     name='body'
@@ -214,27 +216,25 @@ const CreatePostPage = () => {
                 <MarkdownComponent>{body}</MarkdownComponent>
               </div>
             )}
-            {!preview && (
-              <div className='flex flex-row-reverse gap-4'>
-                <button className='btn btn-primary btn-lg' type='submit'>
-                  Create
-                </button>
-                <button
-                  onClick={() => {
-                    router.push('/admin/dashboard');
-                    localStorage.removeItem('body');
-                  }}
-                  className='btn bg-base-200 btn-lg'
-                >
-                  Cancel
-                </button>
-              </div>
-            )}
+
+            <div className='flex flex-row-reverse gap-4'>
+              <button className='btn btn-primary btn-lg' type='submit'>
+                Create
+              </button>
+              <button
+                onClick={() => {
+                  router.push("/admin/dashboard")
+                }}
+                className='btn bg-base-200 btn-lg'
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       </DashboardLayout>
     </div>
-  );
-};
+  )
+}
 
-export default CreatePostPage;
+export default CreatePostPage
