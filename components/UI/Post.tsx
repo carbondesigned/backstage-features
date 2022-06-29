@@ -134,7 +134,7 @@ export const NormalPost = ({
         </div>
         <p className='text-neutral-content'>{post?.excerpt}</p>
         <div className='mt-6 z-40'>
-          <Link href={post.slug}>
+          <Link href={`posts/${post.slug}`}>
             <a className='btn btn-primary px-8'>View</a>
           </Link>
         </div>
@@ -251,7 +251,7 @@ export const LatestPost = ({
         </div>
         <p className='text-neutral-content'>{post.excerpt}</p>
         <div className='card-actions justify-start mt-4 z-40'>
-          <Link href={post.slug}>
+          <Link href={`posts/${post.slug}`}>
             <a className='btn btn-primary px-6'>View</a>
           </Link>
         </div>
