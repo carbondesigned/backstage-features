@@ -2,14 +2,44 @@ module.exports = {
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        "3xl": "1720px",
+        "4xl": "1920px",
+        "5xl": "2560px",
+        "6xl": "2880px",
+        "7xl": "3280px",
+        "8xl": "3840px",
+        "9xl": "4080px",
+        "10xl": "5600px",
+      },
       fontSize: {
         "8xl": "6rem",
       },
       animation: {
         "indicator-bounce": "indicator-bounce 0.5s ease-in-out",
         "slide-up": "slide-up 5s ease-in-out",
+        "nav-fade": "nav-fade 200ms ease",
+        "nav-links-slide": "nav-links-slide 200ms ease",
       },
       keyframes: {
+        "nav-fade": {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
+        "nav-links-slide": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(100%)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+        },
         "indicator-bounce": {
           "0%": {
             transform: "translateY(0)",
