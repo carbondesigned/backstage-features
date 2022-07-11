@@ -22,15 +22,15 @@ const Post: NextPage = () => {
         <title>{post?.title} | Backstage Features by Gracie Lowes</title>
       </Head>
       <Layout>
-        {isLoading && <Loading />}
-        {!isLoading && !error && post && (
-          <>
-            <PostHeader post={post} author={author} />
-            <article className='text-base-100 post-body'>
+        <article className='text-base-100 post-body pt-20'>
+          {isLoading && <Loading />}
+          {!isLoading && !error && post && (
+            <>
+              <PostHeader post={post} author={author} />
               <MarkdownComponent>{post.body}</MarkdownComponent>
-            </article>
-          </>
-        )}
+            </>
+          )}
+        </article>
       </Layout>
     </>
   )

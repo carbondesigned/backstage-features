@@ -2,6 +2,16 @@ module.exports = {
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        "3xl": "1720px",
+        "4xl": "1920px",
+        "5xl": "2560px",
+        "6xl": "2880px",
+        "7xl": "3280px",
+        "8xl": "3840px",
+        "9xl": "4080px",
+        "10xl": "5600px",
+      },
       fontSize: {
         "8xl": "6rem",
       },
