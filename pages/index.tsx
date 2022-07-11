@@ -12,7 +12,7 @@ type Props = {
 
 const Home: NextPage = ({ videos }: Props) => {
   return (
-    <div>
+    <>
       <Head>
         <title>Backstage Features by Gracie Lowes | Home</title>
         <meta
@@ -26,7 +26,7 @@ const Home: NextPage = ({ videos }: Props) => {
         <Posts />
         <Videos videos={videos} />
       </Layout>
-    </div>
+    </>
   )
 }
 

@@ -10,6 +10,10 @@ html {
   position: relative;
 }
 
+.post-body img {
+  @apply rounded-xl;
+}
+
 .post-border::after {
   content: "";
   position: absolute;
