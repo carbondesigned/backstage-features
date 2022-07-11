@@ -1,3 +1,253 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+.post-border {
+  position: relative;
+}
+
+.post-body img {
+  @apply rounded-xl;
+}
+
+.post-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  transition: 500ms ease;
+  padding: 0.2rem;
+  opacity: 0;
+}
+
+.post-border-always {
+  position: relative;
+}
+
+.post-border-always::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  transition: 500ms ease;
+  padding: 0.25rem;
+  background-image: linear-gradient(
+    to bottom left,
+    #ec6c5a 0% 15%,
+    #f4dc5a 15% 60%,
+    #6e8eff 60% 85%,
+    #8d55e9 85% 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient 15s linear infinite reverse;
+}
+
+.post-border:hover::after {
+  opacity: 1;
+  padding: 0.2rem;
+  background-image: linear-gradient(
+    to bottom left,
+    #ec6c5a 0% 15%,
+    #f4dc5a 15% 60%,
+    #6e8eff 60% 85%,
+    #8d55e9 85% 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient 15s linear infinite;
+  animation-direction: alternate-reverse;
+}
+
+.line {
+  transition: 200ms ease;
+}
+
+.post:hover .line {
+  transform: scale(1.25);
+}
+
+/* create a keyframe that will rotate the gradient */
+@keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.loader {
+  @apply border-t-primary;
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
+}
+
+.image-popup {
+  animation: popup 200ms ease;
+}
+
+.markdown h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.markdown h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.markdown h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.markdown em {
+  font-style: italic;
+}
+
+.markdown strong,
+b {
+  font-weight: bold;
+}
+
+.markdown blockquote {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.markdown a {
+  @apply text-primary;
+}
+
+.markdown figure {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.markdown figcaption {
+  display: block;
+}
+
+.markdown img {
+  display: inline-block;
+}
+
+.markdown p {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.markdown q {
+  display: inline;
+}
+
+.markdown strike,
+s {
+  text-decoration: line-through;
+}
+
+.markdown ul {
+  display: block;
+  list-style-type: disc;
+  margin-top: 1em;
+  margin-bottom: 1 em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 40px;
+}
+
+.markdown li {
+  display: list-item;
+}
+
+.markdown ol {
+  display: block;
+  list-style-type: decimal;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 40px;
+}
+.markdown iframe[seamless] {
+  display: block;
+}
+
+.markdown iframe:focus {
+  outline: none;
+}
+
+.markdown hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

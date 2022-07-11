@@ -1,64 +1,42 @@
-import Post from "@/components/Post";
-import Head from "next/head";
-import { getPosts } from "@/lib/api";
-import { PostType, VideoType } from "@/lib/types";
-import Layout from "@/components/Layout";
-import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
-import axios from "axios";
-import ContentGrid from "@/components/ContentGrid";
-import Video from "@/components/Video";
+import axios from "axios"
+import Layout from "components/Layouts/Layout"
+import { HeroSection } from "components/UI/HeroSection"
+import { Posts } from "components/UI/Posts"
+import Videos from "components/UI/Videos"
+import type { NextPage } from "next"
+import Head from "next/head"
 
-interface Props {
-  children: React.ReactNode;
-  posts: PostType[];
-  videos: VideoType[];
+type Props = {
+  videos?: any[]
 }
 
-const Home = ({ posts, videos }: Props) => {
+const Home: NextPage = ({ videos }: Props) => {
   return (
-    <div>
+    <>
       <Head>
-        <title>Backstage Features</title>
+        <title>Backstage Features by Gracie Lowes | Home</title>
         <meta
-          name="description"
-          content="Interviews, articles about your favorite celebrities with Gracie Lowes & Backstage Features"
+          name='description'
+          content='Backstage Features by Gracie Lowes. Interviews, coverages, people, get backstage info about your favorite celeb!'
         />
       </Head>
-      <Navbar />
-      <Hero />
-      <Layout>
-        {!posts && <p>Loading...</p>}
-        <ContentGrid contentTitle="Posts" viewAll="/posts">
-          {posts.slice(0, 6).map((post: any) => (
-            <Post key={post.title} post={post} />
-          ))}
-        </ContentGrid>
-        {!videos && <p>Loading...</p>}
-        <ContentGrid videos contentTitle="Videos" viewAll="/videos">
-          {videos &&
-            videos
-              .slice(0, 4)
-              .map((video) => (
-                <Video
-                  videoId={video.contentDetails.videoId}
-                  key={video.contentDetails.videoId}
-                />
-              ))}
-        </ContentGrid>
-      </Layout>
-    </div>
-  );
-};
 
-export async function getServerSideProps({ preview = false }) {
-  const posts: PostType[] = await getPosts(preview);
-  const { data } = await axios.get(
-    `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=PLGm4HIhsHl1EMUN035h9P2WQG9MTHFZio&key=${process.env.NEXT_PUBLIC_API_KEY}`
-  );
-  return {
-    props: { posts, preview, videos: data.items },
-  };
+      <Layout>
+        <HeroSection />
+        <Posts />
+        <Videos videos={videos} />
+      </Layout>
+    </>
+  )
 }
 
-export default Home;
+export async function getServerSideProps() {
+  const { data } = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId=PLGm4HIhsHl1EMUN035h9P2WQG9MTHFZio&key=${process.env.NEXT_PUBLIC_API_KEY}`
+  )
+  return {
+    props: { videos: data.items },
+  }
+}
+
+export default Home
